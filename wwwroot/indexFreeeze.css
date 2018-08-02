@@ -1,0 +1,16 @@
+#form {
+    width: 50%;
+    padding-left: 5%;
+    padding-top: 25px;
+}
+#list{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+#research{
+    visibility: hidden;
+    margin-left: 5px;
+}
+.fa-snowflake{
+    margin-left: 5px;
+}

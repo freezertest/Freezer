@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Freeeze</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="indexFreeeze.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="indexFreeeze.js"></script>
+    </head>
+
+    <body>
+        <!--navbar-->
+        <nav class="navbar navbar-dark bg-primary">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                  
+                    <span class="navbar-toggler-icon"></span><span class="far fa-snowflake">  Freeeze</span>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#"><span class="fas fa-cookie-bitePantry"></span></a>
+                </div>
+            <button type="button" class="btn btn-success" id="btnadd"><span class="fas fa-plus"></span>  Aggiungi</button>
+            <button type="button" class="btn btn-danger" id="btnadd"><span class="fas fa-trash-alt"></span>  Rimuovi</button>
+            <button type="button" class="btn btn-secondary" id="btnlist"><span class="fas fa-clipboard-list"></span>  Lista</button>
+            <!--search-->
+            <form class="form-inline">
+                    <button type="button" class="btn btn-secondary" id="researchbtn" data-container="body" data-toggle="popover" data-placement="bottom" data-content="La ricerca può avvenire per tipo o per porzione"><span class="fas fa-search"></span>  Ricerca</button>
+                    <div id="research">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Cerca..." aria-label="Search" id="researchtext">
+                        <button class="btn btn-sm btn--success my-2 my-sm-0" type="submit" id="researchimpbtn"><span class="fas fa-location-arrow"></span></button>
+                    </div>
+            </form>
+        </nav>
+        <!--Form-->
+        <div id="addingform">
+        <h1>Freeeze</h1>
+        <div>
+        <!--Nome-->
+        <label for="foodname">Nuovo alimento</label>
+        <input type="text" class="form-control" id="foodname" placeholder="Nome Alimento" value='es.: "Tacchino", "Sgombro", "Salvia", etc...' required>
+        <p>&nbsp;</p>
+        <!-- Tipo -->
+        <label for="foodtype">Tipo di alimento</label>
+        <select class="custom-select" id="foodtype" required>
+                <option selected>Scegli il tipo dell'alimento</option>
+                <option value="1">Pesce</option>
+                <option value="2">Carne</option>
+                <option value="3">Legumi</option>
+                <option value="4">Verdura</option>
+                <option value="5">Erbe Aromatiche-Spezie</option>
+                <option value="6">Altro</option>
+        </select>
+        <p>&nbsp;</p>
+        <!-- Qtà -->
+        <label for="portiondiv">Porzioni</label>
+        <div class="form-group" id="portiondiv">
+                <select class="custom-select" id="foodportion" required>
+                 <small class="form-text text-muted">Se ci sono porzioni diverse scriverlo nelle note</small>
+                  <option selected>Seleziona la porzione</option>
+                  <option value="0">--</option>
+                  <option value="1">X1</option>
+                  <option value="2">X2</option>
+                  <option value="3">X3</option>
+                </select>
+                <div class="invalid-feedback" id="invalid" style="display: none">Solo per il tipo "altro" è possibile non selezionare la quantità</div>
+              </div>
+        <p>&nbsp;</p>
+        <!--Freezer-->
+        <label for="freezer">Freezer</label>
+        <select class="custom-select" id="freezer" required>
+            <option selected>Scegli il freezer di destinazione</option>
+            <option value="1">Cantina</option>
+            <option value="2">Cucina UP</option>
+            <option value="3">Cucina PT</option>
+        </select>
+        <p>&nbsp;</p>
+        <!--Cassetto-->
+        <label for="drawer">Cassetto</label>
+        <select class="custom-select" id="drawer" required>
+            <option selected>Seleziona il cassetto</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <p>&nbsp;</p>
+        <!--Eventuali note-->
+        <div class="form-group">
+            <label for="notes">Note eventuali</label>
+            <textarea class="form-control" id="notes" rows="3"></textarea>
+        </div>
+        </div>
+<button type="button" class="btn btn-primary btn-lg" id="insertbtn">Inserisci!</button>
+        </div>
+        <!--lista-->
+        <div id="foodlist">
+    <h1> Lista alimenti </h1>
+
+        <div id="fruplist">
+            <h2 id="frup"></h2>
+            <table class="table table-striped">
+                <thead> <!-- thead Cass 1 Freezer Up-->
+                    <tr>
+                        <td class="table-info" scope="col" id="c1frup"><td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Nome</td>
+                        <td scope="col">Tipo</td>
+                        <td scope="col">Porzione</td>
+                        <td scope="col">Note</td>
+
+                    </tr>
+                </thead>
+                <tbody id="c1frupbody"><!--body cass 1 freezer up-->
+                </tbody>
+                <thead><!-- thead Cass 2 Freezer Up-->
+                    <tr>
+                        <td class="table-info" scope="col" id="c2frup"><td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Nome</td>
+                        <td scope="col">Tipo</td>
+                        <td scope="col">Porzione</td>
+                        <td scope="col">Note</td>
+                    </tr>
+                </thead>
+                <tbody id="c2frupbody">
+                </tbody>
+                <thead><!-- thead Cass 3 Freezer Up-->
+                    <tr>
+                        <td class="table-info" scope="col" id="c3frup"><td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Nome</td>
+                        <td scope="col">Tipo</td>
+                        <td scope="col">Porzione</td>
+                        <td scope="col">Note</td>
+                    </tr>
+                </thead>
+                <tbody id="c3frupbody">
+                </tbody>
+            </table>
+        </div>
+
+        <div id="frptlist">
+                <h2 id="frpt"></h2>
+                <table class="table table-striped">
+                        <thead> <!-- thead Cass 1 Freezer PT-->
+                            <tr>
+                                <td class="table-info" scope="col" id="c1frpt"><td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Nome</td>
+                                <td scope="col">Tipo</td>
+                                <td scope="col">Porzione</td>
+                                <td scope="col">Note</td>
+        
+                            </tr>
+                        </thead>
+                        <tbody id="c1frptbody"><!--body cass 1 freezer up-->
+                        </tbody>
+                        <thead><!-- thead Cass 2 Freezer PT-->
+                            <tr>
+                                <td class="table-info" scope="col" id="c2frpt"><td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Nome</td>
+                                <td scope="col">Tipo</td>
+                                <td scope="col">Porzione</td>
+                                <td scope="col">Note</td>
+                            </tr>
+                        </thead>
+                        <tbody id="c2frptbody">
+                        </tbody>
+                        <thead><!-- thead Cass 3 Freezer PT-->
+                            <tr>
+                                <td class="table-info" scope="col" id="c3frpt"><td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Nome</td>
+                                <td scope="col">Tipo</td>
+                                <td scope="col">Porzione</td>
+                                <td scope="col">Note</td>
+                            </tr>
+                        </thead>
+                        <tbody id="c3frptbody">
+                        </tbody>
+                    </table>
+        </div>
+
+        <div id="frcantlist">
+                <h2 id="frcant"></h2>
+                <table class="table table-striped">
+                        <thead> <!-- thead Cass 1 Freezer cant-->
+                            <tr>
+                                <td class="table-info" scope="col" id="c1frcant"><td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Nome</td>
+                                <td scope="col">Tipo</td>
+                                <td scope="col">Porzione</td>
+                                <td scope="col">Note</td>
+        
+                            </tr>
+                        </thead>
+                        <tbody id="c1frcantbody"><!--body cass 1 freezer up-->
+                        </tbody>
+                        <thead><!-- thead Cass 2 Freezer PT-->
+                            <tr>
+                                <td class="table-info" scope="col" id="c2frcant"><td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Nome</td>
+                                <td scope="col">Tipo</td>
+                                <td scope="col">Porzione</td>
+                                <td scope="col">Note</td>
+                            </tr>
+                        </thead>
+                        <tbody id="c2frcantbody">
+                        </tbody>
+                        <thead><!-- thead Cass 3 Freezer PT-->
+                            <tr>
+                                <td class="table-info" scope="col" id="c3frcant"><td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Nome</td>
+                                <td scope="col">Tipo</td>
+                                <td scope="col">Porzione</td>
+                                <td scope="col">Note</td>
+                            </tr>
+                        </thead>
+                        <tbody id="c3frcantbody">
+                        </tbody>
+                    </table>
+        </div>
+        </div>
+
+        <!--Error space-->
+            <div class="card" id="errorspace">
+                <h5 class="card-header"><span class="fas fa-exclamation-triangle"></span>  Attenzione!</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Errore nella ricerca</h5>
+                  <p class="card-text" id="errormessage"></p>
+                  <a href="https://localhost:5001/index.html" class="btn btn-primary">Home page</a>
+                </div>
+              </div>
+
+    </body>
+</html>
