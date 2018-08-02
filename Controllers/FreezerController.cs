@@ -25,18 +25,7 @@ namespace FreeezeDotNet.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            var FormViewModel = new FormViewModel()
-            {
-                Name = "Uva",
-                Type = "Verdura",
-                Portion = "x2",
-                Freezer = "Cantina",
-                Drawer = "Cassetto1",
-                Notes = "nota"
-            };
-
-            return new JsonResult(FormViewModel);
-            // return new JsonResult(_freezerRepository.GetAll());
+            return new JsonResult(_freezerRepository.GetAll());
         }
 
         public ActionResult<string> GetSingle(int id)
@@ -47,8 +36,7 @@ namespace FreeezeDotNet.Controllers
         [HttpPost]
         public void Post([FromBody] FormViewModel value)
         {
-            var qualcosa = value.Name;
-            Console.WriteLine("ho postatoooo");
+           _freezerRepository.VerifyFood(value);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using FreeezeDotNet.Model;
 using System.Linq;
+using FreeezeDotNet.ViewModel;
 
 namespace FreeezeDotNet.Repository
 {
@@ -27,5 +28,28 @@ namespace FreeezeDotNet.Repository
         {
             return _freezerList.FirstOrDefault(a => a.Id == id);
         }
+
+        public string VerifyFood(FormViewModel newFood)
+        {
+            if(_freezerList.Where(a=> a.Id==newFood.Freezer).Count()>0){
+                var chosenFreezer=_freezerList.FirstOrDefault(a=> a.Id==newFood.Freezer);
+                if(chosenFreezer.drawers.Where(a=> a.Id==newFood.Drawer).Count()>0){
+                    var chosenDrawer=chosenFreezer.drawers.FirstOrDefault(a=> a.Id==newFood.Drawer);
+                    if((newFood.Type==FoodTypeEnum.Pesce||newFood.Type==FoodTypeEnum.Carne||newFood.Type==FoodTypeEnum.Legumi||newFood.Type==FoodTypeEnum.Verdura)&&newFood.Portion==FoodPortionEnum.None){
+                        return "error";
+                    }
+                    else
+                    {
+                        chosenDrawer.drawerFood.Add(new Food(){FoodName=newFood.Name, FoodType=newFood.Type, FoodPortion=newFood.Portion, FoodNotes=newFood.Notes});
+                        return "insert";
+                    }
+                }
+                else
+                return "drawererror";
+            }
+            else
+            return "freezererror";
+                
+            }
+        }
     }
-}
