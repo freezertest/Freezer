@@ -20,8 +20,9 @@ namespace FreeezeDotNet.Controllers
         {
             _freezerRepository = new FreezerListRepository();
         }
-        [HttpGet]
 
+
+        [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
             var FormViewModel = new FormViewModel()

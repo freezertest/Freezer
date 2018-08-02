@@ -15,16 +15,23 @@ $( document ).ready(function() {
         //"Inserisci!" click
         $("#insertbtn").click(function(){
             alert("click");
-            var row={};
-            row.Name=$("#foodname").val();
-            row.Type=$("#foodtype").val();
-            row.Portion=$("#foodportion").val();
-            row.Freezer=$("#freezer").val();
-            row.Drawer=$("#drawer").val();
-            row.Notes=$("#notes").val();
-            row=JSON.stringify(row);
-            $.post("https://localhost:5001/api/freezer", row, function(result){
-                console.log("POSTATO");
+            var row = {};
+            row.name = $("#foodname").val();
+            row.type = $("#foodtype").val();
+            row.portion = $("#foodportion").val();
+            row.freezer = $("#freezer").val();
+            row.drawer = $("#drawer").val();
+            row.notes = $("#notes").val();
+            row = JSON.stringify(row);
+            $.ajax({
+                url : "https://localhost:5001/api/freezer",
+                type: "post",
+                data: row,
+                dataType: "json",
+                contentType: "application/json",
+                success: function( data, textStatus, jQxhr ){
+                    console.log("Ok");
+                },
             });
         });
     //"LISTA" click

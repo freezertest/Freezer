@@ -10,3 +10,5 @@ namespace FreeezeDotNet.ViewModel{
 
     }
 }
+
+// {"name":"Uva","type":"Verdura","portion":"x2","freezer":"Cantina","drawer":"Cassetto1","notes":"nota"}

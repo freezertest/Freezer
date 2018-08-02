@@ -6,24 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using FreeezeDotNet.Model;
 using FreeezeDotNet.Repository;
 
-namespace FreeezeDotNet.Controllers{
+namespace FreeezeDotNet.Controllers
+{
     [Route("api/[controller]")]
     [ApiController]
-    public class SearchTypeController : ControllerBase{
+    public class SearchTypeController : ControllerBase
+    {
         private List<Freezer> freezerList;
         private List<Freezer> typelistfiltered;
         private FreezerListRepository _freezerRepository;
         //Costruttore-->Get lista freeezer da Repository
-        public SearchTypeController(){
+        public SearchTypeController()
+        {
             _freezerRepository = new FreezerListRepository();
             freezerList = _freezerRepository.GetAll();
         }
         [HttpGet("{searchterm}")]
-        public ActionResult<string> Get(string searchterm){
+        public ActionResult<string> Get(string searchterm)
+        {
             //conversione da stringa di ricerca a Enum 
             var invalidType = 0;
             FoodTypeEnum searchtermenum = FoodTypeEnum.Pesce; //inizializzazione random
-            switch (searchterm.ToUpper()){
+            switch (searchterm.ToUpper())
+            {
                 case "PESCE":
                     break;
                 case "CARNE":
@@ -49,10 +54,12 @@ namespace FreeezeDotNet.Controllers{
                     break;
             }
             //check validità ricerca
-            if (invalidType != 0){
+            if (invalidType != 0)
+            {
                 return "null";
             }
-            else {//creazione lista filtrata
+            else
+            {//creazione lista filtrata
                 typelistfiltered = new List<Freezer>();
                 SearchFrUpByType(freezerList[0], ref typelistfiltered, searchterm, searchtermenum);
                 SearchFrPtByType(freezerList[1], ref typelistfiltered, searchterm, searchtermenum);
@@ -62,7 +69,8 @@ namespace FreeezeDotNet.Controllers{
             }
         }
         // functions creazione lista con solo alimenti del tipo richiesto foreach freezer
-        private void SearchFrUpByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum){
+        private void SearchFrUpByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum)
+        {
             currentList.Add(new Freezer("Freezer Cucina UP - " + type, "Cucina UP", 1));
             if (currentFreezer.drawers[0].drawerFood.Count > 0)
             {
@@ -96,8 +104,9 @@ namespace FreeezeDotNet.Controllers{
                 }
             }
         }
-        
-        private void SearchFrPtByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum){
+
+        private void SearchFrPtByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum)
+        {
             currentList.Add(new Freezer("Freezer Cucina PT - " + type, "Cucina PT", 2));
             if (currentFreezer.drawers[0].drawerFood.Count > 0)
             {
@@ -132,7 +141,8 @@ namespace FreeezeDotNet.Controllers{
             }
         }
 
-        private void SearchFrCantByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum){
+        private void SearchFrCantByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum)
+        {
             currentList.Add(new Freezer("Freezer Cantina - " + type, "Cantina", 3));
             if (currentFreezer.drawers[0].drawerFood.Count > 0)
             {
@@ -170,21 +180,25 @@ namespace FreeezeDotNet.Controllers{
 
     [Route("api/[controller]")]
     [ApiController]
-    public class SearchPortionController : ControllerBase{
+    public class SearchPortionController : ControllerBase
+    {
         private List<Freezer> freezerList;
-            private List<Freezer> typelistfiltered;
-            private FreezerListRepository _freezerRepository;
-            //Costruttore-->Get lista freeezer da Repository
-            public SearchPortionController(){
-                _freezerRepository = new FreezerListRepository();
-                freezerList = _freezerRepository.GetAll();
-            }
-            [HttpGet("{searchterm}")]
-            public ActionResult<string> Get(string searchterm){
+        private List<Freezer> typelistfiltered;
+        private FreezerListRepository _freezerRepository;
+        //Costruttore-->Get lista freeezer da Repository
+        public SearchPortionController()
+        {
+            _freezerRepository = new FreezerListRepository();
+            freezerList = _freezerRepository.GetAll();
+        }
+        [HttpGet("{searchterm}")]
+        public ActionResult<string> Get(string searchterm)
+        {
             //conversione da stringa di ricerca a Enum 
             var invalidPortion = 0;
             FoodPortionEnum searchtermenum = FoodPortionEnum.None; //inizializzazione random
-            switch (searchterm.ToUpper()){
+            switch (searchterm.ToUpper())
+            {
                 case "X1":
                     searchtermenum = FoodPortionEnum.X1;
                     break;
@@ -199,10 +213,12 @@ namespace FreeezeDotNet.Controllers{
                     break;
             }
             //check validità ricerca
-            if (invalidPortion != 0){
+            if (invalidPortion != 0)
+            {
                 return "null";
             }
-            else {//creazione lista filtrata
+            else
+            {//creazione lista filtrata
                 typelistfiltered = new List<Freezer>();
                 SearchFrUpByType(freezerList[0], ref typelistfiltered, searchterm, searchtermenum);
                 SearchFrPtByType(freezerList[1], ref typelistfiltered, searchterm, searchtermenum);
@@ -210,9 +226,10 @@ namespace FreeezeDotNet.Controllers{
 
                 return new JsonResult(typelistfiltered);
             }
-            }
-            // functions creazione lista con solo alimenti del tipo richiesto foreach freezer
-            private void SearchFrUpByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodPortionEnum typeEnum){
+        }
+        // functions creazione lista con solo alimenti del tipo richiesto foreach freezer
+        private void SearchFrUpByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodPortionEnum typeEnum)
+        {
             currentList.Add(new Freezer("Freezer Cucina UP - " + type, "Cucina UP", 1));
             if (currentFreezer.drawers[0].drawerFood.Count > 0)
             {
@@ -245,9 +262,10 @@ namespace FreeezeDotNet.Controllers{
                     }
                 }
             }
-            }
-            
-            private void SearchFrPtByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodPortionEnum typeEnum){
+        }
+
+        private void SearchFrPtByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodPortionEnum typeEnum)
+        {
             currentList.Add(new Freezer("Freezer Cucina PT - " + type, "Cucina PT", 2));
             if (currentFreezer.drawers[0].drawerFood.Count > 0)
             {
@@ -280,9 +298,10 @@ namespace FreeezeDotNet.Controllers{
                     }
                 }
             }
-            }
-    
-            private void SearchFrCantByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodPortionEnum typeEnum){
+        }
+
+        private void SearchFrCantByType(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodPortionEnum typeEnum)
+        {
             currentList.Add(new Freezer("Freezer Cantina - " + type, "Cantina", 3));
             if (currentFreezer.drawers[0].drawerFood.Count > 0)
             {
@@ -315,8 +334,8 @@ namespace FreeezeDotNet.Controllers{
                     }
                 }
             }
-            }
         }
+    }
 
 }
 
