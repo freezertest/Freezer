@@ -15,30 +15,35 @@ namespace FreeezeDotNet.Controllers
     public class FreezerController : ControllerBase
     {
         private FreezerListRepository _freezerRepository;
-        public FreezerController(){
-           _freezerRepository = new FreezerListRepository();
+        
+        public FreezerController()
+        {
+            _freezerRepository = new FreezerListRepository();
         }
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get(){
-            var FormViewModel= new FormViewModel(){
-                Name="Uva",
-                Type="Verdura",
-                Portion="x2",
-                Freezer="Cantina",
-                Drawer="Cassetto1",
-                Notes="nota"
 
+        public ActionResult<IEnumerable<string>> Get()
+        {
+            var FormViewModel = new FormViewModel()
+            {
+                Name = "Uva",
+                Type = "Verdura",
+                Portion = "x2",
+                Freezer = "Cantina",
+                Drawer = "Cassetto1",
+                Notes = "nota"
             };
-            
+
             return new JsonResult(FormViewModel);
             // return new JsonResult(_freezerRepository.GetAll());
         }
 
-        public ActionResult<string> GetSingle(int id){
+        public ActionResult<string> GetSingle(int id)
+        {
             return new JsonResult(_freezerRepository.GetById(id));
         }
 
-         [HttpPost]
+        [HttpPost]
         public void Post([FromBody] FormViewModel value)
         {
             var qualcosa = value.Name;

@@ -12,3 +12,17 @@ C:\Users\aalto.stage\Desktop\FreeezeDotNet\obj\Debug\netcoreapp2.1\FreeezeDotNet
 C:\Users\aalto.stage\Desktop\FreeezeDotNet\obj\Debug\netcoreapp2.1\FreeezeDotNet.RazorTargetAssemblyInfo.cache
 C:\Users\aalto.stage\Desktop\FreeezeDotNet\obj\Debug\netcoreapp2.1\FreeezeDotNet.dll
 C:\Users\aalto.stage\Desktop\FreeezeDotNet\obj\Debug\netcoreapp2.1\FreeezeDotNet.pdb
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\bin\Debug\netcoreapp2.1\FreeezeDotNet.deps.json
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\bin\Debug\netcoreapp2.1\FreeezeDotNet.runtimeconfig.json
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\bin\Debug\netcoreapp2.1\FreeezeDotNet.runtimeconfig.dev.json
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\bin\Debug\netcoreapp2.1\FreeezeDotNet.dll
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\bin\Debug\netcoreapp2.1\FreeezeDotNet.pdb
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.csprojAssemblyReference.cache
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.csproj.CoreCompileInputs.cache
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.RazorAssemblyInfo.cache
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.RazorAssemblyInfo.cs
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.AssemblyInfoInputs.cache
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.AssemblyInfo.cs
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.RazorTargetAssemblyInfo.cache
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.dll
+C:\Users\andrea.merlin\Desktop\Freezer\Freezer\obj\Debug\netcoreapp2.1\FreeezeDotNet.pdb
