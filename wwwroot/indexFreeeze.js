@@ -16,9 +16,9 @@ $( document ).ready(function() {
         $("#insertbtn").click(function(){
             alert("click");
             var row = {};
-            row.name = $("#foodname").val();
-            row.type = $("#foodtype").val();
-            row.portion = $("#foodportion").val();
+            row.name = $("#Name").val();
+            row.type = $("#Type").val();
+            row.portion = $("#Portion").val();
             row.freezer = $("#freezer").val();
             row.drawer = $("#drawer").val();
             row.notes = $("#notes").val();
@@ -93,30 +93,30 @@ $( document ).ready(function() {
 
 //LoadFrInCommonList
 function LoadFrUp(Data){
-    $( "#frup" ).html( Data.freezerName);
-    $( "#c1frup" ).html( Data.drawers[0].drawerName);
+    $( "#frup" ).html( Data.Name);
+    $( "#c1frup" ).html( Data.drawers[0].Name);
     if(Data.drawers[0].drawerFood.length>0){
         for(i=0; i<Data.drawers[0].drawerFood.length;i++){
-            $("#c1frupbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].FoodName+'</td><td>'+Data.drawers[0].drawerFood[i].FoodType+'</td><td>'+Data.drawers[0].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[0].drawerFood[i].FoodNotes+'</td></tr>')
+            $("#c1frupbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].Name+'</td><td>'+Data.drawers[0].drawerFood[i].Type+'</td><td>'+Data.drawers[0].drawerFood[i].Portion+'</td><td>'+Data.drawers[0].drawerFood[i].Notes+'</td></tr>')
         }
     }
     else
     $("#c1frupbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
 
-    $( "#c2frup" ).html( Data.drawers[1].drawerName);
+    $( "#c2frup" ).html( Data.drawers[1].Name);
     if(Data.drawers[1].drawerFood.length>0){
         for(i=0; i<Data.drawers[1].drawerFood.length;i++){
-            $("#c2frupbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].FoodName+'</td><td>'+Data.drawers[1].drawerFood[i].FoodType+'</td><td>'+Data.drawers[1].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[1].drawerFood[i].FoodNotes+'</td></tr>')
+            $("#c2frupbody").html('<tr><td>'+Data.drawers[1].draweFood[i].Name+'</td><td>'+Data.drawers[1].awerFood[i].Type+'</td><td>'+Data.drawers[1].drawerFood[i].Portion+'</td><td>'+Data.drawers[1].drawerFood[i].Notes+'</td></tr>')
         }
     }
     else
     $("#c2frupbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
 
 
-    $( "#c3frup" ).html( Data.drawers[2].drawerName);
+    $( "#c3frup" ).html( Data.drawers[2].Name);
     if(Data.drawers[2].drawerFood.length>0){
         for(i=0; i<Data.drawers[2].drawerFood.length;i++){
-            $("#c3frupbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].FoodName+'</td><td>'+Data.drawers[2].drawerFood[i].FoodType+'</td><td>'+Data.drawers[2].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[2].drawerFood[i].FoodNotes+'</td></tr>')
+            $("#c3frupbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].Name+'</td><td>'+Data.drawers[2].drawerFood[i].Type+'</td><td>'+Data.drawers[2].drawerFood[i].Portion+'</td><td>'+Data.drawers[2].drawerFood[i].Notes+'</td></tr>')
         }
     }
     else
@@ -125,26 +125,26 @@ function LoadFrUp(Data){
 
 function LoadFrPt(Data){
     $( "#frpt" ).html( Data.freezerName);
-    $( "#c1frpt" ).html( Data.drawers[0].drawerName);
+    $( "#c1frpt" ).html( Data.drawers[0].Name);
     if(Data.drawers[0].drawerFood.length>0){
         for(i=0; i<Data.drawers[0].drawerFood.length;i++){
-            $("#c2frptbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].FoodName+'</td><td>'+Data.drawers[0].drawerFood[i].FoodType+'</td><td>'+Data.drawers[0].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[0].drawerFood[i].FoodNotes+'</td></tr>')
+            $("#c2frptbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].Name+'</td><td>'+Data.drawers[0].drawerFood[i].Type+'</td><td>'+Data.drawers[0].drawerFood[i].Portion+'</td><td>'+Data.drawers[0].drawerFood[i].Notes+'</td></tr>')
         }
     }
     else
     $("#c1frptbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');    
-    $( "#c2frpt" ).html( Data.drawers[1].drawerName);
+    $( "#c2frpt" ).html( Data.drawers[1].Name);
     if(Data.drawers[1].drawerFood.length>0){
         for(i=0; i<Data.drawers[1].drawerFood.length;i++){
-            $("#c2frptbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].FoodName+'</td><td>'+Data.drawers[1].drawerFood[i].FoodType+'</td><td>'+Data.drawers[1].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[1].drawerFood[i].FoodNotes+'</td></tr>')
+            $("#c2frptbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].Name+'</td><td>'+Data.drawers[1].drawerFood[i].Type+'</td><td>'+Data.drawers[1].drawerFood[i].Portion+'</td><td>'+Data.drawers[1].drawerFood[i].Notes+'</td></tr>')
         }
     }
     else
     $("#c2frptbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');    
-    $( "#c3frpt" ).html( Data.drawers[2].drawerName);
+    $( "#c3frpt" ).html( Data.drawers[2].Name);
     if(Data.drawers[2].drawerFood.length>0){
         for(i=0; i<Data.drawers[2].drawerFood.length;i++){
-            $("#c3frptbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].FoodName+'</td><td>'+Data.drawers[2].drawerFood[i].FoodType+'</td><td>'+Data.drawers[2].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[2].drawerFood[i].FoodNotes+'</td></tr>')
+            $("#c3frptbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].Name+'</td><td>'+Data.drawers[2].drawerFood[i].Type+'</td><td>'+Data.drawers[2].drawerFood[i].Portion+'</td><td>'+Data.drawers[2].drawerFood[i].Notes+'</td></tr>')
         }
     }
     else
@@ -153,28 +153,28 @@ function LoadFrPt(Data){
 
 function LoadFrCant(Data){
  $( "#frcant" ).html( Data.freezerName);
- $( "#c1frcant" ).html( Data.drawers[0].drawerName);
+ $( "#c1frcant" ).html( Data.drawers[0].Name);
  if(Data.drawers[0].drawerFood.length>0){
      for(i=0; i<Data.drawers[0].drawerFood.length;i++){
-         $("#c1frcantbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].FoodName+'</td><td>'+Data.drawers[0].drawerFood[i].FoodType+'</td><td>'+Data.drawers[0].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[0].drawerFood[i].FoodNotes+'</td></tr>')
+         $("#c1frcantbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].Name+'</td><td>'+Data.drawers[0].drawerFood[i].Type+'</td><td>'+Data.drawers[0].drawerFood[i].Portion+'</td><td>'+Data.drawers[0].drawerFood[i].Notes+'</td></tr>')
      }
  }
  else
  $("#c1frcantbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
  
- $( "#c2frcant" ).html( Data.drawers[1].drawerName);
+ $( "#c2frcant" ).html( Data.drawers[1].Name);
  if(Data.drawers[1].drawerFood.length>0){
      for(i=0; i<Data.drawers[1].drawerFood.length;i++){
-         $("#c2frcantbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].FoodName+'</td><td>'+Data.drawers[1].drawerFood[i].FoodType+'</td><td>'+Data.drawers[1].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[1].drawerFood[i].FoodNotes+'</td></tr>')
+         $("#c2frcantbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].Name+'</td><td>'+Data.drawers[1].drawerFood[i].Type+'</td><td>'+Data.drawers[1].drawerFood[i].Portion+'</td><td>'+Data.drawers[1].drawerFood[i].Notes+'</td></tr>')
      }
  }
  else
  $("#c2frcantbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
 
- $( "#c3frcant" ).html( Data.drawers[2].drawerName);
+ $( "#c3frcant" ).html( Data.drawers[2].Name);
  if(Data.drawers[2].drawerFood.length>0){
      for(i=0; i<Data.drawers[2].drawerFood.length;i++){
-         $("#c3frcantbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].FoodName+'</td><td>'+Data.drawers[2].drawerFood[i].FoodType+'</td><td>'+Data.drawers[2].drawerFood[i].FoodPortion+'</td><td>'+Data.drawers[2].drawerFood[i].FoodNotes+'</td></tr>')
+         $("#c3frcantbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].Name+'</td><td>'+Data.drawers[2].drawerFood[i].Type+'</td><td>'+Data.drawers[2].drawerFood[i].Portion+'</td><td>'+Data.drawers[2].drawerFood[i].Notes+'</td></tr>')
      }
  }
  else

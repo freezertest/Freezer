@@ -40,7 +40,7 @@ namespace FreeezeDotNet.Repository
                     }
                     else
                     {
-                        chosenDrawer.drawerFood.Add(new Food(){FoodName=newFood.Name, FoodType=newFood.Type, FoodPortion=newFood.Portion, FoodNotes=newFood.Notes});
+                        chosenDrawer.DrawerFood.Add(new Food(){Name=newFood.Name, Type=newFood.Type, Portion=newFood.Portion, Notes=newFood.Notes});
                         return "insert";
                     }
                 }
