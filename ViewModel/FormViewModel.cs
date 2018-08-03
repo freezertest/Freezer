@@ -9,6 +9,7 @@ namespace FreeezeDotNet.ViewModel{
         public int Freezer{get;set;}
         public int Drawer{get;set;}
         public string Notes{get;set;}
+        public string BannerCode{get;set;}
 
     }
 }
