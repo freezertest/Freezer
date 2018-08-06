@@ -59,44 +59,27 @@
             <label for="foodtype">Tipo di alimento</label>
             <select class="custom-select" id="foodtype" required>
                 <option selected>Scegli il tipo dell'alimento</option>
-                <option value="0">Carne</option>
-                <option value="1">Pesce</option>
-                <option value="2">Legumi</option>
-                <option value="3">Verdura</option>
-                <option value="4">Erbe Aromatiche-Spezie</option>
-                <option value="5">Altro</option>
             </select>
             <p>&nbsp;</p>
             <!-- Qtà -->
             <label for="portiondiv">Porzioni</label>
             <div class="form-group" id="portiondiv">
                 <select class="custom-select" id="foodportion" required>
-                    <small class="form-text text-muted">Se ci sono porzioni diverse scriverlo nelle note</small>
                     <option selected>Seleziona la porzione</option>
-                    <option value="0">--</option>
-                    <option value="1">X1</option>
-                    <option value="2">X2</option>
-                    <option value="3">X3</option>
                 </select>
+                <small class="form-text text-muted">Se ci sono porzioni diverse scriverlo nelle note</small>
                 <div class="invalid-feedback" id="invalid" style="display: none">Solo per il tipo "altro" è possibile non selezionare la quantità</div>
             </div>
-            <p>&nbsp;</p>
             <!--Freezer-->
             <label for="freezer">Freezer</label>
             <select class="custom-select" id="freezer" required>
                 <option selected>Scegli il freezer di destinazione</option>
-                <option value="1">Cucina UP</option>
-                <option value="2">Cucina PT</option>
-                <option value="3">Cantina</option>
             </select>
             <p>&nbsp;</p>
             <!--Cassetto-->
             <label for="drawer">Cassetto</label>
             <select class="custom-select" id="drawer" required>
                 <option selected>Seleziona il cassetto</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
             </select>
             <p>&nbsp;</p>
             <!--Eventuali note-->
@@ -106,7 +89,7 @@
             </div>
             <!--BannerCode-->
             <div id="bannercode">
-                
+                <button type="button" class="btn btn-dark"><span class="fas fa-camera"></span></button>
             </div>
         </div>
         <button type="button" class="btn btn-primary btn-lg" id="insertbtn">Inserisci!</button>

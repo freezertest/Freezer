@@ -15,7 +15,6 @@ namespace FreeezeDotNet.Controllers
     public class FreezerController : ControllerBase
     {
         private FreezerListRepository _freezerRepository;
-        
         public FreezerController()
         {
             _freezerRepository = new FreezerListRepository();
@@ -23,14 +22,26 @@ namespace FreeezeDotNet.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> GetFreezers()
         {
-            return new JsonResult(_freezerRepository.GetAll());
+            return new JsonResult(_freezerRepository.GetAllFreezers());
         }
-
-        public ActionResult<string> GetSingle(int id)
+        public ActionResult<string> GetSingleFreezer(int id)
         {
             return new JsonResult(_freezerRepository.GetById(id));
+        }
+        [HttpGet]
+         public ActionResult<string> GetDrawers()
+        {
+            return new JsonResult(_freezerRepository.GetAllDrawers());
+        }
+        public ActionResult<string> GetTypes()
+        {
+            return new JsonResult(_freezerRepository.GetAllTypes());
+        }
+        public ActionResult<string> GetPortions()
+        {
+            return new JsonResult(_freezerRepository.GetAllPortions());
         }
 
         [HttpPost]

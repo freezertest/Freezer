@@ -12,17 +12,27 @@ namespace FreeezeDotNet.Repository
         private FreezerContext _db;
         public FreezerListRepository()
         {
-            
-
+            _db= new FreezerContext();
         }
-        public List<Freezer> GetAll()
+        public List<Freezer> GetAllFreezers()
         {
             return _db.Freezers.ToList();
+        }
+        public List<Drawer> GetAllDrawers()
+        {
+            return _db.Drawers.ToList();
+        }
+        public List<FoodType> GetAllTypes(){
+            return _db.Types.ToList();
+        }
+        public List<FoodPortion> GetAllPortions(){
+            return _db.Portions.ToList();
         }
         public Freezer GetById(int id)
         {
             return _db.Freezers.FirstOrDefault(a => a.Id == id);
         }
+
         public string VerifyFood(FormViewModel newFood)
         {
             // if (_db.Freezers.Where(a => a.Id == newFood.Freezer).Count() <= 0)

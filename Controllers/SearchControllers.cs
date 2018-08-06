@@ -18,7 +18,7 @@ namespace FreeezeDotNet.Controllers
         public SearchTypeController()         //Costruttore-->Get lista freeezer da Repository
         {
             _freezerRepository = new FreezerListRepository();
-            freezerList = _freezerRepository.GetAll();
+            freezerList = _freezerRepository.GetAllFreezers();
         }
 
         [HttpGet("{searchterm}")]
@@ -76,7 +76,7 @@ namespace FreeezeDotNet.Controllers
         public SearchPortionController()    //Costruttore-->Get lista freeezer da Repository
         {
             _freezerRepository = new FreezerListRepository();
-            freezerList = _freezerRepository.GetAll();
+            freezerList = _freezerRepository.GetAllFreezers();
         }
 
         [HttpGet("{searchterm}")]
