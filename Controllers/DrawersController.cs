@@ -14,16 +14,19 @@ namespace FreeezeDotNet.Controllers
 
     public class DrawersController : ControllerBase
     {
-        private FreezerListRepository _freezerRepository;
+        private DrawerListRepository _drawerRepository;
         public DrawersController()
         {
-            _freezerRepository = new FreezerListRepository();
+            _drawerRepository = new DrawerListRepository();
         }
-        [HttpGet]
-         public ActionResult<string> GetDrawers()
+
+        [HttpGet("{currentFreezerId}")]         
+        public ActionResult<string> GetDrawers(int currentFreezerId)
         {
-            return new JsonResult(_freezerRepository.GetAllDrawers());
+            var test=_drawerRepository.GetDrawersByFreezerId(currentFreezerId);
+            return new JsonResult(_drawerRepository.GetDrawersByFreezerId(currentFreezerId));
         }
+
 
     }
 }

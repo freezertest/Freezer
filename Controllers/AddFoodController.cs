@@ -14,15 +14,56 @@ namespace FreeezeDotNet.Controllers
 
     public class AddFoodController : ControllerBase
     {
-        private FreezerListRepository _freezerRepository;
+        private FreezerContext _db;
+        private TypesListRepository _typesRepository;
+        private List<FoodType> _types;
+        private List<FoodPortion> _portions;
+        private PortionsListRepository _portionsRepository;
         public AddFoodController()
         {
-            _freezerRepository = new FreezerListRepository();
+            _db = new FreezerContext();
+            _typesRepository = new TypesListRepository();
+            _types = _typesRepository.GetAllTypes();
+            _portionsRepository = new PortionsListRepository();
+            _portions = _portionsRepository.GetAllPortions();
         }
+
         [HttpPost]
-        public void Post([FromBody] FormViewModel value)
+        public string Post([FromBody] FormViewModel value)
         {
-           _freezerRepository.VerifyFood(value);
+            return VerifyFood(value);
         }
+
+        public string VerifyFood(FormViewModel newFood)
+        {
+            if (_db.Freezers.Where(a => a.Id == newFood.Freezer).Count() <= 0)
+                return "Errore nel Freezer. Controlla la tua scelta";
+            else
+            {
+                var chosenFreezer = _db.Freezers.FirstOrDefault(a => a.Id == newFood.Freezer);
+                if (chosenFreezer.Drawers.Where(a => a.Id == newFood.Drawer).Count() <= 0)
+                    return "Errore nel Cassetto. Controlla la tua scelta";
+                else
+                {
+                    var type = _types.FirstOrDefault(a => a.Id == newFood.Type);
+                    var portion = _portions.FirstOrDefault(a => a.Id == newFood.Portion);
+                    if ((type.Name.ToUpper() == "PESCE" || type.Name.ToUpper() == "CARNE") && portion.Name.ToUpper() == "NONE" || type.Name.ToUpper().Contains("ERBE") && portion.Name.ToUpper() != "None")
+                        return "Errore nel Tipo dell'alimento. Controlla la tua scelta";
+
+                    var chosenDrawer = chosenFreezer.Drawers.FirstOrDefault(a => a.Id == newFood.Drawer);
+                    chosenDrawer.DrawerFood.Add(new Food() { Name = newFood.Name, Type = type, Portion = portion, Notes = newFood.Notes });
+                    return "L'alimento è stato inserito con successo!";
+
+                }
+
+            }
+
+
+
+
+        }
+
+
+
     }
 }

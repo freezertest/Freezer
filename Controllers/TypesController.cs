@@ -14,15 +14,15 @@ namespace FreeezeDotNet.Controllers
 
     public class TypesController : ControllerBase
     {
-        private FreezerListRepository _freezerRepository;
+        private TypesListRepository _typesRepository;
         public TypesController()
         {
-            _freezerRepository = new FreezerListRepository();
+            _typesRepository = new TypesListRepository();
         }
         [HttpGet]
         public ActionResult<string> GetTypes()
         {
-            return new JsonResult(_freezerRepository.GetAllTypes());
+            return new JsonResult(_typesRepository.GetAllTypes());
         }
     }
 }

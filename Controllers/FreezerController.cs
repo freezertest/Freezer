@@ -26,6 +26,8 @@ namespace FreeezeDotNet.Controllers
         {
             return new JsonResult(_freezerRepository.GetAllFreezers());
         }
+        [Route("getsinglefreezer/{id}")]
+        [HttpGet]
         public ActionResult<string> GetSingleFreezer(int id)
         {
             return new JsonResult(_freezerRepository.GetById(id));

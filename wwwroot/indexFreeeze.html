@@ -68,7 +68,7 @@
                     <option selected>Seleziona la porzione</option>
                 </select>
                 <small class="form-text text-muted">Se ci sono porzioni diverse scriverlo nelle note</small>
-                <div class="invalid-feedback" id="invalid" style="display: none">Solo per il tipo "altro" è possibile non selezionare la quantità</div>
+                <div class="invalid-feedback" id="invalid" style="display: none">Solo per i tipi "Erbe Aromatiche e Spezie" e "Altro" è possibile non selezionare la quantità.<br/>Il tipo "Erbe aromatiche e spezie" non può avere quantità</div>
             </div>
             <!--Freezer-->
             <label for="freezer">Freezer</label>
@@ -87,7 +87,7 @@
                 <label for="notes">Note eventuali</label>
                 <textarea class="form-control" id="notes" rows="3"></textarea>
             </div>
-            <!--BannerCode-->
+            <!--BarCode-->
             <div id="bannercode">
                 <button type="button" class="btn btn-dark"><span class="fas fa-camera"></span></button>
             </div>
@@ -263,8 +263,18 @@
         <h5 class="card-header">
             <span class="fas fa-exclamation-triangle"></span> Attenzione!</h5>
         <div class="card-body">
-            <h5 class="card-title">Errore nella ricerca</h5>
+            <h5 class="card-title">Errore!</h5>
             <p class="card-text" id="errormessage"></p>
+            <a href="https://localhost:5001/index.html" class="btn btn-primary">Home page</a>
+        </div>
+    </div>
+    <!--Success space-->
+    <div class="card" id="successpace">
+        <h5 class="card-header">
+            <span class="fas fa-check"></span> Attenzione!</h5>
+        <div class="card-body">
+            <h5 class="card-title">Successo!</h5>
+            <p class="card-text" id="successmessage"></p>
             <a href="https://localhost:5001/index.html" class="btn btn-primary">Home page</a>
         </div>
     </div>

@@ -1,29 +1,9 @@
 $( document ).ready(function() {
-    function LoadFreezers() {
-        $.get( "https://localhost:5001/api/freezer", function( data ) {
-            for(var i=0;i<data.length;i++)
-                $( "#freezer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-    })};
-    
-
-    function LoadDrawers() {
-        $.get( "https://localhost:5001/api/drawers", function( data ) {
-            for(var i=0;i<data.length;i++)
-                $( "#drawer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-            
-        })};
-
-        function LoadTypes() {
-            $.get( "https://localhost:5001/api/types", function( data ) {
-                    for(var i=0;i<data.length;i++)
-                    $( "#foodtype" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-            })};
-
-        function LoadPortions() {
-            $.get( "https://localhost:5001/api/portions", function( data ) {
-                    for(var i=0;i<data.length;i++)
-                    $( "#foodportion" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-            })};
+    $("#addingform").hide();
+    $("#foodlist").hide();
+    $("#errorspace").hide();
+    $("#successpace").hide();
+    $('#invalid').css("display","none");
 
 
     //change section
@@ -31,28 +11,30 @@ $( document ).ready(function() {
 
     // });
    
-    $("#addingform").hide();
-    $("#foodlist").hide();
-    $("#errorspace").hide();
      //"Aggiungi" click
     $("#btnadd").click(function(){
         LoadFreezers();
-        LoadDrawers();
+        $('#freezer').change(function(){
+            var id=$('#freezer').val();
+            LoadDrawers(id);
+        });
+        
         LoadTypes();
         LoadPortions();
         $("#addingform").show();
         $("#foodlist").hide();
+        $('#invalid').css("display","none");
     });
         //"Inserisci!" click
         $("#insertbtn").click(function(){
             alert("click");
             var row = {};
-            row.name = $("#name").val();
-            row.type = $("#type").val();
-            row.portion = $("#portion").val();
-            row.freezer = $("#freezer").val();
-            row.drawer = $("#drawer").val();
-            row.notes = $("#notes").val();
+            row.Name = $("#foodname").val();
+            row.Type = $("#foodtype").val();
+            row.Portion = $("#foodportion").val();
+            row.Freezer = $("#freezer").val();
+            row.Drawer = $("#drawer").val();
+            row.Notes = $("#notes").val();
             row = JSON.stringify(row);
             $.ajax({
                 url : "https://localhost:5001/api/addfood",
@@ -60,9 +42,18 @@ $( document ).ready(function() {
                 data: row,
                 datatype: "json",
                 contenttype: "application/json",
-                success: function( data, textStatus, jQxhr ){
-                    console.log("Ok");
+                success: function( response ){
+                    $("#successmessage").html(response);
+                    $("#successpace").show();
+                    $("#addingform").hide();
                 },
+                error: function(response){
+                    // if(response.toUpperCase().contains("TIPO"))
+                    // $('#invalid').css("display","block");
+
+                    $("#errormessage").html(response);
+                    $("#errorspace").show();
+                }
             });
         });
     //"LISTA" click
@@ -70,6 +61,7 @@ $( document ).ready(function() {
         $("#addingform").hide();
         $("#errorspace").hide();
         $("#foodlist").show();
+        $('#invalid').css("display","none");
         $.get( "https://localhost:5001/api/freezer", function( data ) {
             LoadFrUp(data[0]);
             LoadFrPt (data[1]);
@@ -215,3 +207,27 @@ function LoadFrCant(Data){
 //impossibile non mettere porzione se non è spezia o altro
 // if( valore tipo !=5 && valore tipo !=6 && valore qtà ==0)
 // document.getElementsById("invalid").setAttribute("display", "block");
+function LoadFreezers() {
+    $.get( "https://localhost:5001/api/freezer", function( data ) {
+        for(var i=0;i<data.length;i++)
+            $( "#freezer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+})};
+
+
+function LoadDrawers(freezerId) {
+    $.get( "https://localhost:5001/api/drawers/"+freezerId, function( data ) {
+        for(var i=0;i<data.length;i++)
+            $( "#drawer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+    })};
+
+    function LoadTypes() {
+        $.get( "https://localhost:5001/api/types", function( data ) {
+                for(var i=0;i<data.length;i++)
+                $( "#foodtype" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+        })};
+
+    function LoadPortions() {
+        $.get( "https://localhost:5001/api/portions", function( data ) {
+                for(var i=0;i<data.length;i++)
+                $( "#foodportion" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+        })};

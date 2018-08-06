@@ -14,15 +14,15 @@ namespace FreeezeDotNet.Controllers
 
     public class PortionsController : ControllerBase
     {
-        private FreezerListRepository _freezerRepository;
+        private PortionsListRepository _portionsRepository;
         public PortionsController()
         {
-            _freezerRepository = new FreezerListRepository();
+            _portionsRepository = new PortionsListRepository();
         }
         [HttpGet]
          public ActionResult<string> GetPortions()
         {
-            return new JsonResult(_freezerRepository.GetAllPortions());
+            return new JsonResult(_portionsRepository.GetAllPortions());
         }
     }
 }

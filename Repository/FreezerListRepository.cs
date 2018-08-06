@@ -18,41 +18,12 @@ namespace FreeezeDotNet.Repository
         {
             return _db.Freezers.ToList();
         }
-        public List<Drawer> GetAllDrawers()
-        {
-            return _db.Drawers.ToList();
-        }
-        public List<FoodType> GetAllTypes(){
-            return _db.Types.ToList();
-        }
-        public List<FoodPortion> GetAllPortions(){
-            return _db.Portions.ToList();
-        }
         public Freezer GetById(int id)
         {
             return _db.Freezers.FirstOrDefault(a => a.Id == id);
         }
 
-        public string VerifyFood(FormViewModel newFood)
-        {
-            // if (_db.Freezers.Where(a => a.Id == newFood.Freezer).Count() <= 0)
-            //     return "freezererror";
-            // else
-            // {
-            //     var chosenFreezer = _db.Freezers.FirstOrDefault(a => a.Id == newFood.Freezer);
-            //     if (chosenFreezer.drawers.Where(a => a.Id == newFood.Drawer).Count() <= 0)
-            //         return "drawererror";
-            //     else
-                
-            //         if ((newFood.Type == FoodTypeEnum.Pesce || newFood.Type == FoodTypeEnum.Carne || newFood.Type == FoodTypeEnum.Legumi || newFood.Type == FoodTypeEnum.Verdura) && newFood.Portion == FoodPortionEnum.None)
-            //             return "error";
-                    
-            //         var chosenDrawer = chosenFreezer.drawers.FirstOrDefault(a => a.Id == newFood.Drawer);
-            //         chosenDrawer.DrawerFood.Add(new Food() { Name = newFood.Name, Type = newFood.Type, Portion = newFood.Portion, Notes = newFood.Notes });
-            //         return "inserted";
-            return string.Empty;
-
-        }
+        
         public List<Freezer> CreateListByType(string type, FoodTypeEnum typeEnum)
         {
             //creazione lista filtrata
