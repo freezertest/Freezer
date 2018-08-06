@@ -1,16 +1,18 @@
 using FreeezeDotNet.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFCoreWebDemo
+namespace FreeezeDotNet.Model
 {
-    public class EFCoreWebDemoContext : DbContext
+    public class FreezerContext : DbContext
     {
-        public DbSet<Test> Tests { get; set; }
-        // public DbSet<Author> Authors { get; set; }
-
+        public DbSet<Freezer> Freezers { get; set; }
+        public DbSet<Food> Foods{get;set;}
+        public DbSet<Drawer> Drawers{get;set;}
+        public DbSet<FoodPortion> Portions{get;set;}
+        public DbSet<FoodType> Types {get;set;}        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Freezer;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Freezer;MultipleActiveResultSets=true; User Id=sa; Password=capretta18!");
         }
     }
 }

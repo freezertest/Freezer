@@ -3,14 +3,16 @@ using FreeezeDotNet.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreeezeDotNet.Migrations
 {
     [DbContext(typeof(FreezerContext))]
-    partial class EFCoreWebDemoContextModelSnapshot : ModelSnapshot
+    [Migration("20180803145045_migrazione1")]
+    partial class migrazione1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +34,7 @@ namespace FreeezeDotNet.Migrations
 
                     b.HasIndex("FreezerId");
 
-                    b.ToTable("Drawers");
+                    b.ToTable("Drawer");
                 });
 
             modelBuilder.Entity("FreeezeDotNet.Model.Food", b =>
@@ -47,45 +49,15 @@ namespace FreeezeDotNet.Migrations
 
                     b.Property<string>("Notes");
 
-                    b.Property<int>("PortionId");
+                    b.Property<int>("Portion");
 
-                    b.Property<int>("TypeId");
+                    b.Property<int>("Type");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DrawerId");
 
-                    b.HasIndex("PortionId");
-
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("Foods");
-                });
-
-            modelBuilder.Entity("FreeezeDotNet.Model.FoodPortion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Portions");
-                });
-
-            modelBuilder.Entity("FreeezeDotNet.Model.FoodType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
+                    b.ToTable("Food");
                 });
 
             modelBuilder.Entity("FreeezeDotNet.Model.Freezer", b =>
@@ -114,16 +86,6 @@ namespace FreeezeDotNet.Migrations
                     b.HasOne("FreeezeDotNet.Model.Drawer", "Drawer")
                         .WithMany("DrawerFood")
                         .HasForeignKey("DrawerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("FreeezeDotNet.Model.FoodPortion", "Portion")
-                        .WithMany()
-                        .HasForeignKey("PortionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("FreeezeDotNet.Model.FoodType", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
