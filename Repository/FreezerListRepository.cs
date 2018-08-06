@@ -39,7 +39,7 @@ namespace FreeezeDotNet.Repository
                     
             //         var chosenDrawer = chosenFreezer.drawers.FirstOrDefault(a => a.Id == newFood.Drawer);
             //         chosenDrawer.DrawerFood.Add(new Food() { Name = newFood.Name, Type = newFood.Type, Portion = newFood.Portion, Notes = newFood.Notes });
-            //         return "insert";
+            //         return "inserted";
             return string.Empty;
 
         }
