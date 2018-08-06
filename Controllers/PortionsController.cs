@@ -12,26 +12,17 @@ namespace FreeezeDotNet.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class FreezerController : ControllerBase
+    public class PortionsController : ControllerBase
     {
         private FreezerListRepository _freezerRepository;
-        public FreezerController()
+        public PortionsController()
         {
             _freezerRepository = new FreezerListRepository();
         }
-
-
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetFreezers()
+         public ActionResult<string> GetPortions()
         {
-            return new JsonResult(_freezerRepository.GetAllFreezers());
+            return new JsonResult(_freezerRepository.GetAllPortions());
         }
-        public ActionResult<string> GetSingleFreezer(int id)
-        {
-            return new JsonResult(_freezerRepository.GetById(id));
-        }
-       
-       
     }
-
 }

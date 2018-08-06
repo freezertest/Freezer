@@ -7,20 +7,20 @@ $( document ).ready(function() {
     
 
     function LoadDrawers() {
-        $.get( "https://localhost:5001/api/freezer/getdrawers", function( data ) {
+        $.get( "https://localhost:5001/api/drawers", function( data ) {
             for(var i=0;i<data.length;i++)
                 $( "#drawer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
             
         })};
 
         function LoadTypes() {
-            $.get( "https://localhost:5001/api/freezer/gettypes", function( data ) {
+            $.get( "https://localhost:5001/api/types", function( data ) {
                     for(var i=0;i<data.length;i++)
                     $( "#foodtype" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
             })};
 
         function LoadPortions() {
-            $.get( "https://localhost:5001/api/freezer/getportions", function( data ) {
+            $.get( "https://localhost:5001/api/portions", function( data ) {
                     for(var i=0;i<data.length;i++)
                     $( "#foodportion" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
             })};
@@ -55,7 +55,7 @@ $( document ).ready(function() {
             row.notes = $("#notes").val();
             row = JSON.stringify(row);
             $.ajax({
-                url : "https://localhost:5001/api/freezer",
+                url : "https://localhost:5001/api/addfood",
                 type: "post",
                 data: row,
                 datatype: "json",
