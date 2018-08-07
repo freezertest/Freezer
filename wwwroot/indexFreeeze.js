@@ -50,7 +50,7 @@ $(document).ready(function () {
                 $("#addingform").hide();
             },
             error: function (response) {
-                if(response.toUpperCaseCase().contains("TIPO"))
+                if(response.toUpperCase().contains("TIPO"))
                 $('#invalid').css("display","block");
 
                 $("#errormessage").html(response);
@@ -150,7 +150,7 @@ function LoadFrCotentByType(filteredList, searchterm) {
         for (i = 0; i < data.lenght; i++)
             $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></thead><tbody id="' + data[i].Name + 'body">');
         for (j = 0; j < filteredList.lenght; j++) {
-            if (filteredList[j].Portion.toUpperCaseCase() == data[i].Name.toUpperCaseCase())
+            if (filteredList[j].Portion.toUpperCase() == data[i].Name.toUpperCase())
                 $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="'+filteredList[j].Id+'"><span class="far fa-trash-alt" ></span></button></td></tr>');
         }
         $('#foodfilteredtable').html('</tbody>');
@@ -164,7 +164,7 @@ function LoadFrCotentByPortion(filteredList, searchterm) {
         for (i = 0; i < data.lenght; i++)
             $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></tr></thead><tbody id="' + data[i].Name + 'body">');
         for (j = 0; j < filteredList.lenght; j++) {
-            if (filteredList[j].Type.toUpperCaseCase() == data[i].Name.toUpperCaseCase())
+            if (filteredList[j].Type.toUpperCase() == data[i].Name.toUpperCase())
                 $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="'+filteredList[j].Id+'"><span class="far fa-trash-alt "></span></button></td></tr>');
         }
         $('#foodfilteredtable').html('</tbody>');
@@ -176,28 +176,28 @@ function LoadFrCotentByPortion(filteredList, searchterm) {
 function LoadFreezers() {
     $.get("https://localhost:5001/api/freezer", function (data) {
         for (var i = 0; i < data.length; i++)
-            $("#freezer").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            $("#freezer").append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
     })
 };
 
 function LoadDrawers(freezerId) {
     $.get("https://localhost:5001/api/drawers/" + freezerId, function (data) {
         for (var i = 0; i < data.length; i++)
-            $("#drawer").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            $("#drawer").append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
     })
 };
 
 function LoadTypes() {
     $.get("https://localhost:5001/api/types", function (data) {
         for (var i = 0; i < data.length; i++)
-            $("#foodtype").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            $("#foodtype").append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
     })
 };
 
 function LoadPortions() {
     $.get("https://localhost:5001/api/portions", function (data) {
         for (var i = 0; i < data.length; i++)
-            $("#foodportion").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            $("#foodportion").append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
     })
 };
 
