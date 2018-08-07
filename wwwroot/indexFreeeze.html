@@ -30,7 +30,7 @@
         </div>
         <button type="button" class="btn btn-success" id="btnadd">
             <span class="fas fa-plus"></span> Aggiungi</button>
-        <button type="button" class="btn btn-danger" id="btnadd">
+        <button type="button" class="btn btn-danger" id="btndelete">
             <span class="fas fa-trash-alt"></span> Rimuovi</button>
         <button type="button" class="btn btn-secondary" id="btnlist">
             <span class="fas fa-clipboard-list"></span> Lista</button>
@@ -94,170 +94,16 @@
         </div>
         <button type="button" class="btn btn-primary btn-lg" id="insertbtn">Inserisci!</button>
     </div>
-    <!--lista-->
+    <!--common lista-->
     <div id="foodlist">
         <h1> Lista alimenti </h1>
-
-        <div id="fruplist">
-            <h2 id="frup"></h2>
-            <table class="table table-striped">
-                <thead>
-                    <!-- thead Cass 1 Freezer Up-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c1frup">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-
-                    </tr>
-                </thead>
-                <tbody id="c1frupbody">
-                    <!--body cass 1 freezer up-->
-                </tbody>
-                <thead>
-                    <!-- thead Cass 2 Freezer Up-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c2frup">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-                    </tr>
-                </thead>
-                <tbody id="c2frupbody">
-                </tbody>
-                <thead>
-                    <!-- thead Cass 3 Freezer Up-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c3frup">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-                    </tr>
-                </thead>
-                <tbody id="c3frupbody">
-                </tbody>
-            </table>
-        </div>
-
-        <div id="frptlist">
-            <h2 id="frpt"></h2>
-            <table class="table table-striped">
-                <thead>
-                    <!-- thead Cass 1 Freezer PT-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c1frpt">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-
-                    </tr>
-                </thead>
-                <tbody id="c1frptbody">
-                    <!--body cass 1 freezer up-->
-                </tbody>
-                <thead>
-                    <!-- thead Cass 2 Freezer PT-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c2frpt">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-                    </tr>
-                </thead>
-                <tbody id="c2frptbody">
-                </tbody>
-                <thead>
-                    <!-- thead Cass 3 Freezer PT-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c3frpt">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-                    </tr>
-                </thead>
-                <tbody id="c3frptbody">
-                </tbody>
-            </table>
-        </div>
-
-        <div id="frcantlist">
-            <h2 id="frcant"></h2>
-            <table class="table table-striped">
-                <thead>
-                    <!-- thead Cass 1 Freezer cant-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c1frcant">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-
-                    </tr>
-                </thead>
-                <tbody id="c1frcantbody">
-                    <!--body cass 1 freezer up-->
-                </tbody>
-                <thead>
-                    <!-- thead Cass 2 Freezer PT-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c2frcant">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-                    </tr>
-                </thead>
-                <tbody id="c2frcantbody">
-                </tbody>
-                <thead>
-                    <!-- thead Cass 3 Freezer PT-->
-                    <tr>
-                        <td class="table-info" scope="col" id="c3frcant">
-                            <td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nome</td>
-                        <td scope="col">Tipo</td>
-                        <td scope="col">Porzione</td>
-                        <td scope="col">Note</td>
-                    </tr>
-                </thead>
-                <tbody id="c3frcantbody">
-                </tbody>
-            </table>
-        </div>
     </div>
-
+    <!--TypeFiltered-->
+    <div id="foodfilteredlist">
+        <h1 id="termsearched"> Lista alimenti di tipo</h1>
+            <table class="table table-striped" id="foodfilteredtable">
+            </table>
+    </div>
     <!--Error space-->
     <div class="card" id="errorspace">
         <h5 class="card-header">

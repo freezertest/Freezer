@@ -1,233 +1,229 @@
-$( document ).ready(function() {
+$(document).ready(function () {
     $("#addingform").hide();
     $("#foodlist").hide();
     $("#errorspace").hide();
     $("#successpace").hide();
-    $('#invalid').css("display","none");
+    $('#invalid').css("display", "none");
+    $('#foodfilteredlist').hide();
 
 
     //change section
     // $("#changesection").click(function{
 
     // });
-   
-     //"Aggiungi" click
-    $("#btnadd").click(function(){
+
+    //"Aggiungi" click
+    $("#btnadd").click(function () {
         LoadFreezers();
-        $('#freezer').change(function(){
-            var id=$('#freezer').val();
+        $('#freezer').change(function () {
+            var id = $('#freezer').val();
             LoadDrawers(id);
         });
-        
+
         LoadTypes();
         LoadPortions();
-        $("#addingform").show();
         $("#foodlist").hide();
-        $('#invalid').css("display","none");
+        $('#foodfilteredlist').hide();
+        $('#invalid').css("display", "none");
+        $("#addingform").show();
     });
-        //"Inserisci!" click
-        $("#insertbtn").click(function(){
-            alert("click");
-            var row = {};
-            row.Name = $("#foodname").val();
-            row.Type = $("#foodtype").val();
-            row.Portion = $("#foodportion").val();
-            row.Freezer = $("#freezer").val();
-            row.Drawer = $("#drawer").val();
-            row.Notes = $("#notes").val();
-            row = JSON.stringify(row);
-            $.ajax({
-                url : "https://localhost:5001/api/addfood",
-                type: "post",
-                data: row,
-                datatype: "json",
-                contenttype: "application/json",
-                success: function( response ){
-                    $("#successmessage").html(response);
-                    $("#successpace").show();
-                    $("#addingform").hide();
-                },
-                error: function(response){
-                    // if(response.toUpperCase().contains("TIPO"))
-                    // $('#invalid').css("display","block");
+    //"Inserisci!" click
+    $("#insertbtn").click(function () {
+        alert("click");
+        var row = {};
+        row.Name = $("#foodname").val();
+        row.Type = $("#foodtype").val();
+        row.Portion = $("#foodportion").val();
+        row.Freezer = $("#freezer").val();
+        row.Drawer = $("#drawer").val();
+        row.Notes = $("#notes").val();
+        row = JSON.stringify(row);
+        $.ajax({
+            url: "https://localhost:5001/api/food",
+            type: "post",
+            data: row,
+            datatype: "json",
+            contenttype: "application/json",
+            success: function (response) {
+                $("#successmessage").html(response);
+                $("#successpace").show();
+                $("#addingform").hide();
+            },
+            error: function (response) {
+                if(response.toUpperCaseCase().contains("TIPO"))
+                $('#invalid').css("display","block");
 
-                    $("#errormessage").html(response);
-                    $("#errorspace").show();
-                }
-            });
-        });
-    //"LISTA" click
-    $("#btnlist").click(function(){
-        $("#addingform").hide();
-        $("#errorspace").hide();
-        $("#foodlist").show();
-        $('#invalid').css("display","none");
-        $.get( "https://localhost:5001/api/freezer", function( data ) {
-            LoadFrUp(data[0]);
-            LoadFrPt (data[1]);
-            LoadFrCant (data[2]);
-            alert( "Load was performed." );
-          });
-    });
-    //"SEARCH" click
-    $("#researchbtn").click(function(){
-        if($("#research").css("visibility")=="visible")
-            $("#research").css("visibility", "hidden");
-        else
-        $("#research").css("visibility", "visible");
-           
-    });
-    $("#researchimpbtn").click(function(){
-       var searchTerm = $("#research").val();
-       if(searchTerm.toUpper()=="PESCE"||searchTerm.toUpper()=="CARNE"||searchTerm.toUpper()=="LEGUMI"||searchTerm.toUpper()=="VERDURA"||searchTerm.toUpper().contains("ERBE"||"SPEZIE")==true||searchTerm.toUpper()=="ALTRO"){
-        $.get( "https://localhost:5001/api/searchtype", function( data ) {
-            if(data=="null"){
-                $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
+                $("#errormessage").html(response);
                 $("#errorspace").show();
             }
-            else{
-                LoadFrUp(data);
-                LoadFrPt(data);
-                LoadFrCant(data);
-            }
-          });
-       }
-       else{
-            if(searchTerm.toUpper()=="X1"||searchTerm.toUpper()=="X2"||searchTerm.toUpper()=="X3"){
-                $.get( "https://localhost:5001/api/searchportion", function( data ) {
-                    if(data=="null"){
+        });
+        //"LISTA" click
+        $("#btnlist").click(function () {
+            $("#addingform").hide();
+            $("#errorspace").hide();
+            $("#foodlist").show();
+            $('#invalid').css("display", "none");
+            LoadList();
+        });
+
+    });
+    //"DELETE" click
+    $("#btndelete").click(function () {
+        $("#addingform").hide();
+        $("#errorspace").hide();
+        $('#invalid').css("display", "none");
+        $('#rbtn').css("visibility", "visible");
+        if ($('#foodfilteredlist').is(":hidden") == true && $('#foodlist').is(":hidden") == true)
+            LoadList();
+        });
+    //"ELIMINA(BIDONCINO)" click
+    $('rbtn').click(function(){
+       chosen= $(this).attr('id');
+       $.ajax({
+        type: "DELETE",
+        url: 'https://localhost:5001/api/food'+chosen,
+        data: {_method: 'delete', _token :token},
+        success: function (response) {
+            $("#successmessage").html(response);
+            $('#foodfilteredlist').hide();
+            $('#foodlist').hide();
+            $("#successpace").show();
+           
+        },
+        error: function (response) {
+            $('#foodfilteredlist').hide();
+            $('#foodlist').hide();
+            $("#errormessage").html(response);
+            $("#errorspace").show();
+        }
+        });
+   
+
+    });
+    
+    //"SEARCH" click
+    $("#researchbtn").click(function () {
+        if ($("#research").css("visibility") == "visible")
+            $("#research").css("visibility", "hidden")
+        $("#research").css("visibility", "visible");
+    });
+    //"INVIO RICERCA" click
+    $("#researchimpbtn").click(function () {
+        $('#foodfilteredlist').hide();
+        var searchTerm = $("#researchtext").val();
+        if (searchTerm.toUpperCase() == "PESCE" || searchTerm.toUpperCase() == "CARNE" || searchTerm.toUpperCase() == "LEGUMI" || searchTerm.toUpperCase() == "VERDURA" || searchTerm.toUpperCase().contains("ERBE" || "SPEZIE") == true || searchTerm.toUpperCase() == "ALTRO") {
+            $.get("https://localhost:5001/api/searchtype", function (data, getResult) {
+                if (getResult.toUpperCase().contains('INESISTENTE')) {
+                    $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
+                    $("#errorspace").show();
+                }
+                if (getResult.toUpperCase().contains('NON SONO PRESENTI ALIMENTI')) {
+                    $("#errormessage").html(getResult);
+                    $("#errorspace").show();
+                }
+                LoadFrCotentByType(data, searchTerm);
+            });
+        }
+        else {
+            if (searchTerm.toUpperCase() == "X1" || searchTerm.toUpperCase() == "X2" || searchTerm.toUpperCase() == "X3") {
+                $.get("https://localhost:5001/api/searchportion", function (data) {
+                    if (getResult.toUpperCase().contains('INESISTENTE')) {
                         $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
-                        $("#errorspace").show();                    }
-                    else{
-                        LoadFrUp(data);
-                        LoadFrPt(data);
-                        LoadFrCant(data);
+                        $("#errorspace").show();
+                    }
+                    else {
+                        LoadFrCotentByPortion(data, searchTerm);
                     }
                 });
             }
-            else{
+            else {
                 $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
-                $("#errorspace").show();        
+                $("#errorspace").show();
             }
         }
     });
-
 });
-
-//LoadFrInCommonList
-function LoadFrUp(Data){
-    $( "#frup" ).html( Data.name);
-    $( "#c1frup" ).html( Data.drawers[0].name);
-    if(Data.drawers[0].drawerFood.length>0){
-        for(i=0; i<Data.drawers[0].drawerFood.length;i++){
-            $("#c1frupbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].name+'</td><td>'+Data.drawers[0].drawerFood[i].type+'</td><td>'+Data.drawers[0].drawerFood[i].portion+'</td><td>'+Data.drawers[0].drawerFood[i].notes+'</td></tr>')
+//LOAD FILTERED LIST
+function LoadFrCotentByType(filteredList, searchterm) {
+    $('#termsearched').append(searchterm);
+    $.get("https://localhost:5001/api/portions", function (data) {
+        for (i = 0; i < data.lenght; i++)
+            $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></thead><tbody id="' + data[i].Name + 'body">');
+        for (j = 0; j < filteredList.lenght; j++) {
+            if (filteredList[j].Portion.toUpperCaseCase() == data[i].Name.toUpperCaseCase())
+                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="'+filteredList[j].Id+'"><span class="far fa-trash-alt" ></span></button></td></tr>');
         }
-    }
-    else
-    $("#c1frupbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
-
-    $( "#c2frup" ).html( Data.drawers[1].name);
-    if(Data.drawers[1].drawerFood.length>0){
-        for(i=0; i<Data.drawers[1].drawerFood.length;i++){
-            $("#c2frupbody").html('<tr><td>'+Data.drawers[1].draweFood[i].name+'</td><td>'+Data.drawers[1].awerFood[i].type+'</td><td>'+Data.drawers[1].drawerFood[i].portion+'</td><td>'+Data.drawers[1].drawerFood[i].notes+'</td></tr>')
-        }
-    }
-    else
-    $("#c2frupbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
-
-
-    $( "#c3frup" ).html( Data.drawers[2].name);
-    if(Data.drawers[2].drawerFood.length>0){
-        for(i=0; i<Data.drawers[2].drawerFood.length;i++){
-            $("#c3frupbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].name+'</td><td>'+Data.drawers[2].drawerFood[i].type+'</td><td>'+Data.drawers[2].drawerFood[i].portion+'</td><td>'+Data.drawers[2].drawerFood[i].notes+'</td></tr>')
-        }
-    }
-    else
-    $("#c3frupbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
+        $('#foodfilteredtable').html('</tbody>');
+        $('#foodfilteredlist').show();
+    });
 }
 
-function LoadFrPt(Data){
-    $( "#frpt" ).html( Data.freezername);
-    $( "#c1frpt" ).html( Data.drawers[0].name);
-    if(Data.drawers[0].drawerFood.length>0){
-        for(i=0; i<Data.drawers[0].drawerFood.length;i++){
-            $("#c2frptbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].name+'</td><td>'+Data.drawers[0].drawerFood[i].type+'</td><td>'+Data.drawers[0].drawerFood[i].portion+'</td><td>'+Data.drawers[0].drawerFood[i].notes+'</td></tr>')
+function LoadFrCotentByPortion(filteredList, searchterm) {
+    $('#termsearched').append(searchterm);
+    $.get("https://localhost:5001/api/types", function (data) {
+        for (i = 0; i < data.lenght; i++)
+            $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></tr></thead><tbody id="' + data[i].Name + 'body">');
+        for (j = 0; j < filteredList.lenght; j++) {
+            if (filteredList[j].Type.toUpperCaseCase() == data[i].Name.toUpperCaseCase())
+                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="'+filteredList[j].Id+'"><span class="far fa-trash-alt "></span></button></td></tr>');
         }
-    }
-    else
-    $("#c1frptbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');    
-    $( "#c2frpt" ).html( Data.drawers[1].name);
-    if(Data.drawers[1].drawerFood.length>0){
-        for(i=0; i<Data.drawers[1].drawerFood.length;i++){
-            $("#c2frptbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].name+'</td><td>'+Data.drawers[1].drawerFood[i].type+'</td><td>'+Data.drawers[1].drawerFood[i].portion+'</td><td>'+Data.drawers[1].drawerFood[i].notes+'</td></tr>')
-        }
-    }
-    else
-    $("#c2frptbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');    
-    $( "#c3frpt" ).html( Data.drawers[2].name);
-    if(Data.drawers[2].drawerFood.length>0){
-        for(i=0; i<Data.drawers[2].drawerFood.length;i++){
-            $("#c3frptbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].name+'</td><td>'+Data.drawers[2].drawerFood[i].type+'</td><td>'+Data.drawers[2].drawerFood[i].portion+'</td><td>'+Data.drawers[2].drawerFood[i].notes+'</td></tr>')
-        }
-    }
-    else
-    $("#c3frptbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
+        $('#foodfilteredtable').html('</tbody>');
+        $('#foodfilteredlist').show();
+    });
 }
 
-function LoadFrCant(Data){
- $( "#frcant" ).html( Data.freezername);
- $( "#c1frcant" ).html( Data.drawers[0].name);
- if(Data.drawers[0].drawerFood.length>0){
-     for(i=0; i<Data.drawers[0].drawerFood.length;i++){
-         $("#c1frcantbody").html('<tr><td>'+Data.drawers[0].drawerFood[i].name+'</td><td>'+Data.drawers[0].drawerFood[i].type+'</td><td>'+Data.drawers[0].drawerFood[i].portion+'</td><td>'+Data.drawers[0].drawerFood[i].notes+'</td></tr>')
-     }
- }
- else
- $("#c1frcantbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
- 
- $( "#c2frcant" ).html( Data.drawers[1].name);
- if(Data.drawers[1].drawerFood.length>0){
-     for(i=0; i<Data.drawers[1].drawerFood.length;i++){
-         $("#c2frcantbody").html('<tr><td>'+Data.drawers[1].drawerFood[i].name+'</td><td>'+Data.drawers[1].drawerFood[i].type+'</td><td>'+Data.drawers[1].drawerFood[i].portion+'</td><td>'+Data.drawers[1].drawerFood[i].notes+'</td></tr>')
-     }
- }
- else
- $("#c2frcantbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
-
- $( "#c3frcant" ).html( Data.drawers[2].name);
- if(Data.drawers[2].drawerFood.length>0){
-     for(i=0; i<Data.drawers[2].drawerFood.length;i++){
-         $("#c3frcantbody").html('<tr><td>'+Data.drawers[2].drawerFood[i].name+'</td><td>'+Data.drawers[2].drawerFood[i].type+'</td><td>'+Data.drawers[2].drawerFood[i].portion+'</td><td>'+Data.drawers[2].drawerFood[i].notes+'</td></tr>')
-     }
- }
- else
- $("#c3frcantbody").html('<tr>Non ci sono alimenti in questo cassetto</tr>');
- }
-
-//impossibile non mettere porzione se non è spezia o altro
-// if( valore tipo !=5 && valore tipo !=6 && valore qtà ==0)
-// document.getElementsById("invalid").setAttribute("display", "block");
+//FUNCTIONS LOAD FORM
 function LoadFreezers() {
-    $.get( "https://localhost:5001/api/freezer", function( data ) {
-        for(var i=0;i<data.length;i++)
-            $( "#freezer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-})};
-
+    $.get("https://localhost:5001/api/freezer", function (data) {
+        for (var i = 0; i < data.length; i++)
+            $("#freezer").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+    })
+};
 
 function LoadDrawers(freezerId) {
-    $.get( "https://localhost:5001/api/drawers/"+freezerId, function( data ) {
-        for(var i=0;i<data.length;i++)
-            $( "#drawer" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-    })};
+    $.get("https://localhost:5001/api/drawers/" + freezerId, function (data) {
+        for (var i = 0; i < data.length; i++)
+            $("#drawer").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+    })
+};
 
-    function LoadTypes() {
-        $.get( "https://localhost:5001/api/types", function( data ) {
-                for(var i=0;i<data.length;i++)
-                $( "#foodtype" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-        })};
+function LoadTypes() {
+    $.get("https://localhost:5001/api/types", function (data) {
+        for (var i = 0; i < data.length; i++)
+            $("#foodtype").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+    })
+};
 
-    function LoadPortions() {
-        $.get( "https://localhost:5001/api/portions", function( data ) {
-                for(var i=0;i<data.length;i++)
-                $( "#foodportion" ).append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
-        })};
+function LoadPortions() {
+    $.get("https://localhost:5001/api/portions", function (data) {
+        for (var i = 0; i < data.length; i++)
+            $("#foodportion").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+    })
+};
+
+//LOAD COMMON LIST
+function LoadList() {
+    $.get("https://localhost:5001/api/freezer", function (fr) {
+        for (var i = 0; i < fr.lenght; i++) {
+            $("#foodlist").html('<div id="' + fr[i].Name.toLowerCase() + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped"></div>');
+            $.get("https://localhost:5001/api/drawers", function (dr) {
+                for (var j = 0; j < dr.lenght; j++) {
+                    if (dr.FreezerName == fr[i].Name)
+                        $('#' + fr[i].Name + 'list').append('<thead><tr><td class="table-info" scope="col" id="' + dr[j].Name.toLowerCase() + fr[i].Name.toLowerCase() + '"><td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>');
+                    $.get("https://localhost:5001/api/foods", function (fd) {
+                        for (var m = 0; m < fd.lenght; m++) {
+                            if (fd.DrawerId == dr[j].Id) {
+                                $('#' + fr[i].Name + 'list').append('<tr><td>' + fd.Name + '</td><td>' + fd.Type + '</td><td>' + fd.Portion + '</td><td>' + fd.Notes + '</td><button type="button" class="btn btn-danger rbtn" id="'+fd.Id+'"><span class="far fa-trash-alt "></span></button></tr>');
+
+                            }
+                            $('#' + fr[i].Name + 'list').append('</tbody>');
+
+                        }
+
+                    });
+                }
+
+            });
+        }
+    });
+}

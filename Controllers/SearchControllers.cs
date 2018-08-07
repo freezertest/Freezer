@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FreeezeDotNet.Model;
 using FreeezeDotNet.Repository;
+using FreeezeDotNet.ViewModel;
 
 namespace FreeezeDotNet.Controllers
 {
@@ -12,57 +13,61 @@ namespace FreeezeDotNet.Controllers
     [ApiController]
     public class SearchTypeController : ControllerBase
     {
-        private List<Freezer> freezerList;
-        private List<Freezer> typelistfiltered;
-        private FreezerListRepository _freezerRepository;
+        private TypesListRepository _typesRepository;
+        private List<TypeViewModel> typelistfiltered;
+        private List<FoodType> _types;
         public SearchTypeController()         //Costruttore-->Get lista freeezer da Repository
         {
-            _freezerRepository = new FreezerListRepository();
-            freezerList = _freezerRepository.GetAllFreezers();
+            _typesRepository = new TypesListRepository();
+            _types = _typesRepository.GetAllTypes();
         }
 
         [HttpGet("{searchterm}")]
-        public ActionResult<string> Get(string searchterm)
+        public ActionResult<string> Get(string searchTerm, out string searchResult)
         {
-            //conversione da stringa di ricerca a Enum 
+            //conversione da stringa di ricerca a tipo 
             var invalidType = 0;
-            FoodTypeEnum searchtermEnum = FoodTypeEnum.Pesce; //inizializzazione random
-            switch (searchterm.ToUpper())
+            FoodType searchType;
+            searchType = new FoodType();
+            switch (searchTerm.ToUpper())
             {
                 case "PESCE":
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper() == "PESCE");
                     break;
                 case "CARNE":
-                    searchtermEnum = FoodTypeEnum.Carne;
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper() == "CARNE");
                     break;
                 case "LEGUMI":
-                    searchtermEnum = FoodTypeEnum.Legumi;
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper() == "LEGUMI");
                     break;
                 case "VERDURA":
-                    searchtermEnum = FoodTypeEnum.Verdura;
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper() == "VERDURA");
                     break;
                 case "ERBE":
-                    searchtermEnum = FoodTypeEnum.ErbeAromaticheSpezie;
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper().Contains("ERBE"));
                     break;
                 case "SPEZIE":
-                    searchtermEnum = FoodTypeEnum.ErbeAromaticheSpezie;
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper().Contains("SPEZIE"));
                     break;
                 case "ALTRO":
-                    searchtermEnum = FoodTypeEnum.Altro;
+                    searchType = _types.FirstOrDefault(a => a.Name.ToUpper() == "ALTRO");
                     break;
                 default:
                     invalidType++;
                     break;
             }
             //check validità ricerca
-            if (invalidType != 0) 
+            if (invalidType != 0)
             {
-                return "null";
+                searchResult = "tipo inesistente";
+                return "Hai ricercato un tipo inesistente";
             }
-            else //Crea lista filtrata
-            {
-                typelistfiltered=_freezerRepository.CreateListByType(searchterm,searchtermEnum);
-                return new JsonResult (typelistfiltered);
-            }
+
+            //Crea lista filtrata
+            var ris = string.Empty;
+            typelistfiltered = _typesRepository.CreateListByType(searchType, out ris);
+            searchResult = ris;
+            return new JsonResult(typelistfiltered);
         }
     }
 
@@ -70,47 +75,54 @@ namespace FreeezeDotNet.Controllers
     [ApiController]
     public class SearchPortionController : ControllerBase
     {
-        private List<Freezer> freezerList;
-        private List<Freezer> typelistfiltered;
-        private FreezerListRepository _freezerRepository;
-        public SearchPortionController()    //Costruttore-->Get lista freeezer da Repository
+        private PortionsListRepository _portionsRepository;
+        private List<PortionViewModel> portionlistfiltered;
+        private List<FoodPortion> _portions;
+        public SearchPortionController()         //Costruttore-->Get lista freeezer da Repository
         {
-            _freezerRepository = new FreezerListRepository();
-            freezerList = _freezerRepository.GetAllFreezers();
+            _portionsRepository = new PortionsListRepository();
+            _portions = _portionsRepository.GetAllPortions();
         }
 
         [HttpGet("{searchterm}")]
-        public ActionResult<string> Get(string searchterm)
+        public ActionResult<string> Get(string searchTerm, out string searchResult)
         {
-            //conversione da stringa di ricerca a Enum 
+            //conversione da stringa di ricerca a porzione 
             var invalidPortion = 0;
-            FoodPortionEnum searchtermEnum = FoodPortionEnum.None; //inizializzazione random
-            switch (searchterm.ToUpper())
+            FoodPortion searchPortion;
+            searchPortion = new FoodPortion();
+            switch (searchTerm.ToUpper())
             {
-            case "X1":
-                searchtermEnum = FoodPortionEnum.X1;
-                break;
-            case "X2":
-                searchtermEnum = FoodPortionEnum.X2;
-                break;
-            case "X3":
-                searchtermEnum = FoodPortionEnum.X3;
-                break;
-            default:
-                invalidPortion++;
-                break;
+                case "X1":
+                    searchPortion = _portions.FirstOrDefault(a => a.Name.ToUpper() == "X1");
+                    break;
+                case "X2":
+                    searchPortion = _portions.FirstOrDefault(a => a.Name.ToUpper() == "X2");
+                    break;
+                case "X3":
+                    searchPortion = _portions.FirstOrDefault(a => a.Name.ToUpper() == "X3");
+                    break;
+                case "NONE":
+                    searchPortion = _portions.FirstOrDefault(a => a.Name.ToUpper() == "NONE");
+                    break;
+                default:
+                    invalidPortion++;
+                    break;
             }
             //check validità ricerca
             if (invalidPortion != 0)
             {
-            return "null";
+                searchResult = "porzione inesistente";
+                return "Hai ricercato una porzione inesistente";
             }
-            else
-            {//creazione lista filtrata
-                typelistfiltered=_freezerRepository.CreateListByPortion(searchterm,searchtermEnum);
-                return new JsonResult (typelistfiltered);
-            }
+
+            //Crea lista filtrata
+            var ris = string.Empty;
+            portionlistfiltered = _portionsRepository.CreateListByPortion(searchPortion, out ris);
+            searchResult = ris;
+            return new JsonResult(portionlistfiltered);
         }
     }
+   
 
 }

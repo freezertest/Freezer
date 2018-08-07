@@ -24,16 +24,7 @@ namespace FreeezeDotNet.Repository
         }
 
         
-        public List<Freezer> CreateListByType(string type, FoodTypeEnum typeEnum)
-        {
-            //creazione lista filtrata
-            var filteredList = new List<Freezer>();
-            SearchFrUpBySearchTerm(_db.Freezers.FirstOrDefault(), ref filteredList, type, typeEnum);
-            SearchFrPtBySearchTerm(_db.Freezers.Skip(1).FirstOrDefault(), ref filteredList, type, typeEnum);
-            SearchFrCantBySearchTerm(_db.Freezers.Skip(2).FirstOrDefault(), ref filteredList, type, typeEnum);
-
-            return filteredList;
-        }
+        
         public List<Freezer> CreateListByPortion(string portion, FoodPortionEnum portionEnum)
         {
             //creazione lista filtrata
@@ -45,113 +36,7 @@ namespace FreeezeDotNet.Repository
             return filteredList;
         }
 
-        // functions creazione lista con solo alimenti del TIPO richiesto foreach freezer
-        public void SearchFrUpBySearchTerm(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum)
-        {
-            // currentList.Add(new Freezer("Freezer Cucina UP - " + type, "Cucina UP", 1));
-            // if (currentFreezer.drawers[0].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[0].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[0].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[0].drawers[0].DrawerFood.Add(currentFreezer.drawers[0].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-            // if (currentFreezer.drawers[1].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[1].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[1].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[0].drawers[1].DrawerFood.Add(currentFreezer.drawers[1].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-
-            // if (currentFreezer.drawers[2].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[2].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[2].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[0].drawers[2].DrawerFood.Add(currentFreezer.drawers[2].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-        }
-
-        private void SearchFrPtBySearchTerm(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum)
-        {
-            // currentList.Add(new Freezer("Freezer Cucina PT - " + type, "Cucina PT", 2));
-            // if (currentFreezer.drawers[0].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[0].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[0].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[1].drawers[0].DrawerFood.Add(currentFreezer.drawers[0].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-            // if (currentFreezer.drawers[1].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[1].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[1].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[1].drawers[1].DrawerFood.Add(currentFreezer.drawers[1].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-
-            // if (currentFreezer.drawers[2].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[2].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[2].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[1].drawers[2].DrawerFood.Add(currentFreezer.drawers[2].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-        }
-
-        private void SearchFrCantBySearchTerm(Freezer currentFreezer, ref List<Freezer> currentList, string type, FoodTypeEnum typeEnum)
-        {
-            // currentList.Add(new Freezer("Freezer Cantina - " + type, "Cantina", 3));
-            // if (currentFreezer.drawers[0].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[0].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[0].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[2].drawers[0].DrawerFood.Add(currentFreezer.drawers[0].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-            // if (currentFreezer.drawers[1].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[1].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[1].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[2].drawers[1].DrawerFood.Add(currentFreezer.drawers[1].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-            // if (currentFreezer.drawers[2].DrawerFood.Count > 0)
-            // {
-            //     for (var i = 0; i < currentFreezer.drawers[2].DrawerFood.Count; i++)
-            //     {
-            //         if (currentFreezer.drawers[2].DrawerFood[i].Type == typeEnum)
-            //         {
-            //             currentList[2].drawers[2].DrawerFood.Add(currentFreezer.drawers[2].DrawerFood[i]);
-            //         }
-            //     }
-            // }
-        }
+        
 
         //functions creazione lista con solo alimenti con la PORZIONE richiesta foreach freezer
         private List<Freezer> SearchFrUpBySearchTerm(Freezer currentFreezer, ref List<Freezer> currentList, string portion, FoodPortionEnum portionEnum)

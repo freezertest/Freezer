@@ -1,5 +1,6 @@
 using FreeezeDotNet.Model;
 using Microsoft.EntityFrameworkCore;
+// using Microsoft.EntityFrameworkCore.Proxies;
 
 namespace FreeezeDotNet.Model
 {
@@ -12,6 +13,7 @@ namespace FreeezeDotNet.Model
         public DbSet<FoodType> Types {get;set;}        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Freezer;MultipleActiveResultSets=true; User Id=sa; Password=capretta18!");
         }
     }
