@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FreeezeDotNet.Model;
-using FreeezeDotNet.Repository;
-using FreeezeDotNet.ViewModel;
+using Inventory.Model;
+using Inventory.Repository;
+using Inventory.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
-namespace FreeezeDotNet.Controllers
+namespace Inventory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

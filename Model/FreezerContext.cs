@@ -1,8 +1,8 @@
-using FreeezeDotNet.Model;
+using Inventory.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies;
 
-namespace FreeezeDotNet.Model
+namespace Inventory.Model
 {
     public class FreezerContext : DbContext
     {

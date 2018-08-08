@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FreeezeDotNet.Migrations
+namespace Inventory.Migrations
 {
     public partial class CreateDatabase : Migration
     {

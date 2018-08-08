@@ -1,4 +1,4 @@
-namespace FreeezeDotNet.ViewModel{
+namespace Inventory.ViewModel{
 
     public class TypeViewModel{
 

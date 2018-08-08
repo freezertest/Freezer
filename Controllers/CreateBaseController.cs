@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using FreeezeDotNet.Model;
+using Inventory.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FreeezeDotNet.Controllers
+namespace Inventory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

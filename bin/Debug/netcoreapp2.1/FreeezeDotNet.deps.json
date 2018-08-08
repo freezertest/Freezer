@@ -22,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "FreeezeDotNet/1.0.0": {
+      "Inventory/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.EntityFrameworkCore.Proxies": "2.1.1",
@@ -30,10 +30,10 @@
           "Microsoft.NETCore.App": "2.1.0"
         },
         "runtime": {
-          "FreeezeDotNet.dll": {}
+          "Inventory.dll": {}
         },
         "compile": {
-          "FreeezeDotNet.dll": {}
+          "Inventory.dll": {}
         }
       },
       "Castle.Core/4.2.1": {
@@ -3245,7 +3245,7 @@
     }
   },
   "libraries": {
-    "FreeezeDotNet/1.0.0": {
+    "Inventory/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

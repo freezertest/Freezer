@@ -1,6 +1,6 @@
-using FreeezeDotNet.Model;
+using Inventory.Model;
 
-namespace FreeezeDotNet.ViewModel{
+namespace Inventory.ViewModel{
     public class FormViewModel{
 
         public string Name {get;set;}

@@ -1,4 +1,4 @@
-namespace FreeezeDotNet.Model
+namespace Inventory.Model
 {
 
     public class FoodType

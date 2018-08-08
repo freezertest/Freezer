@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using FreeezeDotNet.Model;
+using Inventory.Model;
 using System.Linq;
-using FreeezeDotNet.ViewModel;
+using Inventory.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FreeezeDotNet.Repository
+namespace Inventory.Repository
 {
 
     public class TypesListRepository

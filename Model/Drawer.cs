@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FreeezeDotNet.Model
+namespace Inventory.Model
 {
     public class Drawer
     {

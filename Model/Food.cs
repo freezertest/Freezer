@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FreeezeDotNet.Repository;
-using FreeezeDotNet.ViewModel;
+using Inventory.Repository;
+using Inventory.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
-namespace FreeezeDotNet.Model
+namespace Inventory.Model
 {
 
     public class Food

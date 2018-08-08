@@ -11838,9 +11838,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\aalto.stage\\Desktop\\Freezer\\FreeezeDotNet.csproj",
-      "projectName": "FreeezeDotNet",
-      "projectPath": "c:\\Users\\aalto.stage\\Desktop\\Freezer\\FreeezeDotNet.csproj",
+      "projectUniqueName": "c:\\Users\\aalto.stage\\Desktop\\Freezer\\Inventory.csproj",
+      "projectName": "Inventory",
+      "projectPath": "c:\\Users\\aalto.stage\\Desktop\\Freezer\\Inventory.csproj",
       "packagesPath": "C:\\Users\\aalto.stage\\.nuget\\packages\\",
       "outputPath": "c:\\Users\\aalto.stage\\Desktop\\Freezer\\obj\\",
       "projectStyle": "PackageReference",
