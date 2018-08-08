@@ -230,9 +230,9 @@ function LoadList() {
             $("#foodlist").append('<div id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped" id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table"></table></div>');
             var sHtml;
             for (var j = 0; j < fr[i].Drawers.length; j++) {
-                sHtml+='<thead><tr><td class="table-info" scope="col"' + fr[i].Drawers[j].Name.toLowerCase() + '></td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>';
+                sHtml+='<thead><tr><td class="table-info" scope="col">' + fr[i].Drawers[j].Name.toLowerCase() + '</td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>';
                 if (fr[i].Drawers[j].DrawerFood.length <= 0)
-                    sHtml+='<tr>Non ci sono alimenti in questo cassetto</tr></tbody>';
+                    sHtml+='<tr><td colspan="4">Non ci sono alimenti in questo cassetto</tr></td></tbody>';
 
                 for (var m = 0; m < fr[i].Drawers[j].DrawerFood.length; m++)
                     sHtml+='<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>';
