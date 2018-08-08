@@ -227,18 +227,19 @@ function LoadPortions() {
 function LoadList() {
     $.get("https://localhost:5001/api/freezer", function (fr) {
         for (var i = 0; i < fr.length; i++) {
-            $("#foodlist").append('<div id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped"></div>');
+            $("#foodlist").append('<div id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped" id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table"></table></div>');
+            var sHtml;
             for (var j = 0; j < fr[i].Drawers.length; j++) {
-                $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('<thead><tr><td class="table-info" scope="col"' + fr[i].Drawers[j].Name.toLowerCase() + '></td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>');
-                if (fr[i].Drawers[j].DrawerFood.length <= 0) {
-                    $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('<tr>Non ci sono alimenti in questo cassetto</tr>');
-                    $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</tbody>');
-                }
+                sHtml+='<thead><tr><td class="table-info" scope="col"' + fr[i].Drawers[j].Name.toLowerCase() + '></td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>';
+                if (fr[i].Drawers[j].DrawerFood.length <= 0)
+                    sHtml+='<tr>Non ci sono alimenti in questo cassetto</tr></tbody>';
+
                 for (var m = 0; m < fr[i].Drawers[j].DrawerFood.length; m++)
-                    $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>');
+                    sHtml+='<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>';
                 $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</tbody>');
             }
-            $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</table>');
+            $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table').append(sHtml+'</table>');
+            sHtml='';
         }
 
     });
