@@ -9,11 +9,11 @@ $(document).ready(function () {
 
 
     //change section
-    $("#changesection").click(function(){
-        if ($("#pantry").is(':hidden')==true)
+    $("#changesection").click(function () {
+        if ($("#pantry").is(':hidden') == true)
             $("#pantry").show();
         else
-        $('#pantry').hide();
+            $('#pantry').hide();
     });
 
     //"Aggiungi" click
@@ -53,31 +53,31 @@ $(document).ready(function () {
             success: function (response) {
                 $("#errormessage").html(response);
                 $("#errorspace").show();
-                $('#invalid').css("display","block");
-                if(response.toUpperCase().contains("SUCCESSO")==true){
+                $('#invalid').css("display", "block");
+                if (response.toUpperCase().contains("SUCCESSO") == true) {
                     $("#successmessage").html(response);
                     $("#successpace").show();
                     $("#addingform").hide();
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                $("#errormessage").html(errorThrown+"<br/>Non hai riempito qualche campo!");
+                $("#errormessage").html(errorThrown + "<br/>Non hai riempito qualche campo!");
                 $("#errorspace").show();
             }
         });
     });
-        //"LISTA" click
-        $("#btnlist").click(function () {
-            $("#addingform").hide();
-            $('#pantry').hide();
-            $("#errorspace").hide();
-            $('#invalid').css("display", "none");
-            LoadList();
-            $("#foodlist").show();
-            
-        });
+    //"LISTA" click
+    $("#btnlist").click(function () {
+        $("#addingform").hide();
+        $('#pantry').hide();
+        $("#errorspace").hide();
+        $('#invalid').css("display", "none");
+        LoadList();
+        $("#foodlist").show();
 
-    
+    });
+
+
     //"DELETE" click
     $("#btndelete").click(function () {
         $("#addingform").hide();
@@ -87,32 +87,32 @@ $(document).ready(function () {
         $('#rbtn').css("visibility", "visible");
         if ($('#foodfilteredlist').is(":hidden") == true && $('#foodlist').is(":hidden") == true)
             LoadList();
-        });
+    });
     //"ELIMINA(BIDONCINO)" click
-    $('rbtn').click(function(){
-       chosen= $(this).attr('id');
-       $.ajax({
-        type: "DELETE",
-        url: 'https://localhost:5001/api/food'+chosen,
-        data: {_method: 'delete', _token :token},
-        success: function (response) {
-            $("#successmessage").html(response);
-            $('#foodfilteredlist').hide();
-            $('#foodlist').hide();
-            $("#successpace").show();
-           
-        },
-        error: function (response) {
-            $('#foodfilteredlist').hide();
-            $('#foodlist').hide();
-            $("#errormessage").html(response);
-            $("#errorspace").show();
-        }
+    $('rbtn').click(function () {
+        chosen = $(this).attr('id');
+        $.ajax({
+            type: "DELETE",
+            url: 'https://localhost:5001/api/food' + chosen,
+            data: { _method: 'delete', _token: token },
+            success: function (response) {
+                $("#successmessage").html(response);
+                $('#foodfilteredlist').hide();
+                $('#foodlist').hide();
+                $("#successpace").show();
+
+            },
+            error: function (response) {
+                $('#foodfilteredlist').hide();
+                $('#foodlist').hide();
+                $("#errormessage").html(response);
+                $("#errorspace").show();
+            }
         });
-   
+
 
     });
-    
+
     //"SEARCH" click
     $("#researchbtn").click(function () {
         $('#pantry').hide();
@@ -125,7 +125,7 @@ $(document).ready(function () {
         $('#foodfilteredlist').hide();
         var searchTerm = $("#researchtext").val();
         if (searchTerm.toUpperCase() == "PESCE" || searchTerm.toUpperCase() == "CARNE" || searchTerm.toUpperCase() == "LEGUMI" || searchTerm.toUpperCase() == "VERDURA" || searchTerm.toUpperCase().contains("ERBE" || "SPEZIE") == true || searchTerm.toUpperCase() == "ALTRO") {
-            $.get("https://localhost:5001/api/searchtype"+searchTerm, function (data) {
+            $.get("https://localhost:5001/api/searchtype" + searchTerm, function (data) {
                 if (data.toUpperCase().contains('INESISTENTE')) {
                     $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
                     $("#errorspace").show();
@@ -139,7 +139,7 @@ $(document).ready(function () {
         }
         else {
             if (searchTerm.toUpperCase() == "X1" || searchTerm.toUpperCase() == "X2" || searchTerm.toUpperCase() == "X3") {
-                $.get("https://localhost:5001/api/searchportion/"+searchTerm, function (data) {
+                $.get("https://localhost:5001/api/searchportion/" + searchTerm, function (data) {
                     if (getResult.toUpperCase().contains('INESISTENTE')) {
                         $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
                         $("#errorspace").show();
@@ -156,11 +156,11 @@ $(document).ready(function () {
         }
     });
     //HOMEPAGE click
-    $('#homepage').click(function(){
+    $('#homepage').click(function () {
         window.location.href = "https://localhost:5001/indexFreeeze.html";
     });
     //CLOSE click
-    $('#close').click(function(){
+    $('#close').click(function () {
         $('#errorspace').hide();
         $('#successpace').hide();
     });
@@ -173,7 +173,7 @@ function LoadFrCotentByType(filteredList, searchterm) {
             $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></thead><tbody id="' + data[i].Name + 'body">');
         for (j = 0; j < filteredList.length; j++) {
             if (filteredList[j].Portion.toUpperCase() == data[i].Name.toUpperCase())
-                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="'+filteredList[j].Id+'"><span class="far fa-trash-alt" ></span></button></td></tr>');
+                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="' + filteredList[j].Id + '"><span class="far fa-trash-alt" ></span></button></td></tr>');
         }
         $('#foodfilteredtable').html('</tbody>');
         $('#foodfilteredlist').show();
@@ -187,7 +187,7 @@ function LoadFrCotentByPortion(filteredList, searchterm) {
             $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></tr></thead><tbody id="' + data[i].Name + 'body">');
         for (j = 0; j < filteredList.length; j++) {
             if (filteredList[j].Type.toUpperCase() == data[i].Name.toUpperCase())
-                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="'+filteredList[j].Id+'"><span class="far fa-trash-alt "></span></button></td></tr>');
+                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="' + filteredList[j].Id + '"><span class="far fa-trash-alt "></span></button></td></tr>');
         }
         $('#foodfilteredtable').html('</tbody>');
         $('#foodfilteredlist').show();
@@ -226,26 +226,20 @@ function LoadPortions() {
 //LOAD COMMON LIST
 function LoadList() {
     $.get("https://localhost:5001/api/freezer", function (fr) {
-        for (var i = 0; i < fr.length; i++) { 
-            $("#foodlist").html('<div id="' + fr[i].Name.toLowerCase() + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped"></div>');
-            $.get("https://localhost:5001/api/drawers", function (dr) {
-                for (var j = 0; j < dr.length; j++) {
-                    if (dr.FreezerName == fr[i].Name)
-                        $('#' + fr[i].Name + 'list').append('<thead><tr><td class="table-info" scope="col" id="' + dr[j].Name.toLowerCase() + fr[i].Name.toLowerCase() + '"><td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>');
-                    $.get("https://localhost:5001/api/foods", function (fd) {
-                        for (var m = 0; m < fd.length; m++) {
-                            if (fd.DrawerId == dr[j].Id) {
-                                $('#' + fr[i].Name + 'list').append('<tr><td>' + fd.Name + '</td><td>' + fd.Type + '</td><td>' + fd.Portion + '</td><td>' + fd.Notes + '</td><button type="button" class="btn btn-danger rbtn" id="'+fd.Id+'"><span class="far fa-trash-alt "></span></button></tr>');
-
-                            }
-                            $('#' + fr[i].Name + 'list').append('</tbody>');
-
-                        }
-
-                    });
+        for (var i = 0; i < fr.length; i++) {
+            $("#foodlist").append('<div id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped"></div>');
+            for (var j = 0; j < fr[i].Drawers.length; j++) {
+                $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('<thead><tr><td class="table-info" scope="col"' + fr[i].Drawers[j].Name.toLowerCase() + '></td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>');
+                if (fr[i].Drawers[j].DrawerFood.length <= 0) {
+                    $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('<tr>Non ci sono alimenti in questo cassetto</tr>');
+                    $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</tbody>');
                 }
-
-            });
+                for (var m = 0; m < fr[i].Drawers[j].DrawerFood.length; m++)
+                    $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>');
+                $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</tbody>');
+            }
+            $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</table>');
         }
+
     });
 }
