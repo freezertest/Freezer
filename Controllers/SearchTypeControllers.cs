@@ -63,10 +63,10 @@ namespace FreeezeDotNet.Controllers
             }
 
             //Crea lista filtrata
-            string ris;
-            typelistfiltered = _typesRepository.CreateListByType(searchType, ref ris);
-            if(ris.ToUpper()!="SUCCESS")
-            return ris;
+            string ris = string.Empty;
+            typelistfiltered = _typesRepository.CreateListByType(searchType, out ris);
+            if (ris.ToUpper() != "SUCCESS")
+                return ris;
 
             return new JsonResult(typelistfiltered);
         }

@@ -7,10 +7,6 @@ namespace FreeezeDotNet.Model
     {
         public int Id{get;set;}
         public string Name{get;set;}
-        public virtual ICollection<Drawer> Drawers{get;set;}
-
-        public Freezer(){
-            Drawers=new List<Drawer>();
-        }
+        public virtual List<Drawer> Drawers{get;set;}
     }
 }

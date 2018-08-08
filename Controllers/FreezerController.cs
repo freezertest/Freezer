@@ -22,9 +22,9 @@ namespace FreeezeDotNet.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetFreezers()
+        public JsonResult GetFreezers()
         {
-            var test=new JsonResult(_freezerRepository.GetAllFreezers());
+            var test = new JsonResult(_freezerRepository.GetAllFreezers().ToList());
             return test;
         }
 

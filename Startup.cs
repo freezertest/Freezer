@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FreeezeDotNet.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace FreeezeDotNet
@@ -27,7 +29,13 @@ namespace FreeezeDotNet
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //per evitare il problema del loop nella generazione degli elementi
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +51,12 @@ namespace FreeezeDotNet
             else
             {
                 app.UseHsts();
+            }
+
+            //Creo il database se non esiste
+            using (var client = new FreezerContext())
+            {
+                client.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();

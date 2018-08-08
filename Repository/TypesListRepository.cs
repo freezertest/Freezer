@@ -24,11 +24,11 @@ namespace FreeezeDotNet.Repository
             var filteredTypeList = new List<TypeViewModel>();
             var filteredFoods = _db.Foods.Where(a => a.TypeId == type.Id);
             if (filteredFoods.Count() <= 0)
-                result="Non sono presenti alimenti di tipo " + type.Name;
+                result = "Non sono presenti alimenti di tipo " + type.Name;
             foreach (var food in filteredFoods)
-                filteredTypeList.Add(new TypeViewModel() { FreezerName = food.Drawer.Freezer.Name, DrawerName = food.Drawer.Name, Portion = food.Portion.Name, Notes = food.Notes, Name=food.Name, Id=food.Id });
-    
-            result="succes";
+                filteredTypeList.Add(new TypeViewModel() { FreezerName = food.Drawer.Freezer.Name, DrawerName = food.Drawer.Name, Portion = food.Portion.Name, Notes = food.Notes, Name = food.Name, Id = food.Id });
+
+            result = "succes";
             return filteredTypeList;
         }
     }

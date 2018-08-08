@@ -169,9 +169,9 @@ $(document).ready(function () {
 function LoadFrCotentByType(filteredList, searchterm) {
     $('#termsearched').append(searchterm);
     $.get("https://localhost:5001/api/portions", function (data) {
-        for (i = 0; i < data.lenght; i++)
+        for (i = 0; i < data.length; i++)
             $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></thead><tbody id="' + data[i].Name + 'body">');
-        for (j = 0; j < filteredList.lenght; j++) {
+        for (j = 0; j < filteredList.length; j++) {
             if (filteredList[j].Portion.toUpperCase() == data[i].Name.toUpperCase())
                 $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="'+filteredList[j].Id+'"><span class="far fa-trash-alt" ></span></button></td></tr>');
         }
@@ -183,9 +183,9 @@ function LoadFrCotentByType(filteredList, searchterm) {
 function LoadFrCotentByPortion(filteredList, searchterm) {
     $('#termsearched').append(searchterm);
     $.get("https://localhost:5001/api/types", function (data) {
-        for (i = 0; i < data.lenght; i++)
+        for (i = 0; i < data.length; i++)
             $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></tr></thead><tbody id="' + data[i].Name + 'body">');
-        for (j = 0; j < filteredList.lenght; j++) {
+        for (j = 0; j < filteredList.length; j++) {
             if (filteredList[j].Type.toUpperCase() == data[i].Name.toUpperCase())
                 $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="'+filteredList[j].Id+'"><span class="far fa-trash-alt "></span></button></td></tr>');
         }
@@ -226,14 +226,14 @@ function LoadPortions() {
 //LOAD COMMON LIST
 function LoadList() {
     $.get("https://localhost:5001/api/freezer", function (fr) {
-        for (var i = 0; i < fr.lenght; i++) {
+        for (var i = 0; i < fr.length; i++) { 
             $("#foodlist").html('<div id="' + fr[i].Name.toLowerCase() + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped"></div>');
             $.get("https://localhost:5001/api/drawers", function (dr) {
-                for (var j = 0; j < dr.lenght; j++) {
+                for (var j = 0; j < dr.length; j++) {
                     if (dr.FreezerName == fr[i].Name)
                         $('#' + fr[i].Name + 'list').append('<thead><tr><td class="table-info" scope="col" id="' + dr[j].Name.toLowerCase() + fr[i].Name.toLowerCase() + '"><td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>');
                     $.get("https://localhost:5001/api/foods", function (fd) {
-                        for (var m = 0; m < fd.lenght; m++) {
+                        for (var m = 0; m < fd.length; m++) {
                             if (fd.DrawerId == dr[j].Id) {
                                 $('#' + fr[i].Name + 'list').append('<tr><td>' + fd.Name + '</td><td>' + fd.Type + '</td><td>' + fd.Portion + '</td><td>' + fd.Notes + '</td><button type="button" class="btn btn-danger rbtn" id="'+fd.Id+'"><span class="far fa-trash-alt "></span></button></tr>');
 

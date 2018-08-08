@@ -16,7 +16,7 @@ namespace FreeezeDotNet.Repository
         }
         public List<Freezer> GetAllFreezers()
         {
-            var test=_db.Freezers.Include(p=>p.Drawers).ToList();
+            var test = _db.Freezers.Include(p => p.Drawers).ThenInclude(l => l.DrawerFood).ToList();
             return test;
         }
         public Freezer GetById(int id)

@@ -14,7 +14,7 @@ namespace FreeezeDotNet.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Freezer;MultipleActiveResultSets=true; User Id=sa; Password=capretta18!");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Freezer;MultipleActiveResultSets=true; User Id=sa; Password=aalto");
         }
     }
 }
