@@ -84,7 +84,7 @@ $(document).ready(function () {
         $("#errorspace").hide();
         $('#pantry').hide();
         $('#invalid').css("display", "none");
-        $('#rbtn').css("visibility", "visible");
+        $('.rbtn').css("visibility", "visible");
         if ($('#foodfilteredlist').is(":hidden") == true && $('#foodlist').is(":hidden") == true)
             LoadList();
     });
