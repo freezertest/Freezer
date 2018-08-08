@@ -1,6 +1,6 @@
 using FreeezeDotNet.Model;
 using Microsoft.EntityFrameworkCore;
-// using Microsoft.EntityFrameworkCore.Proxies;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 namespace FreeezeDotNet.Model
 {

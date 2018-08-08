@@ -60,16 +60,18 @@ $(document).ready(function () {
                 $("#errorspace").show();
             }
         });
+    });
         //"LISTA" click
         $("#btnlist").click(function () {
             $("#addingform").hide();
             $("#errorspace").hide();
             $('#invalid').css("display", "none");
-            $("#foodlist").show();
             LoadList();
+            $("#foodlist").show();
+            
         });
 
-    });
+    
     //"DELETE" click
     $("#btndelete").click(function () {
         $("#addingform").hide();
@@ -107,7 +109,7 @@ $(document).ready(function () {
     //"SEARCH" click
     $("#researchbtn").click(function () {
         if ($("#research").css("visibility") == "visible")
-            $("#research").css("visibility", "hidden")
+            $("#research").css("visibility", "hidden");
         $("#research").css("visibility", "visible");
     });
     //"INVIO RICERCA" click
@@ -189,7 +191,7 @@ function LoadFreezers() {
     $.get("https://localhost:5001/api/freezer", function (data) {
         for (var i = 0; i < data.length; i++)
             $("#freezer").append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
-    })
+    });
 };
 
 function LoadDrawers(freezerId) {

@@ -8,8 +8,8 @@ namespace FreeezeDotNet.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Food> DrawerFood { get; set; }
-        public Freezer Freezer { get; set; }
+        public virtual ICollection<Food> DrawerFood { get; set; }
+        public virtual Freezer Freezer { get; set; }
         public int FreezerId {get;set;}
         public Drawer(){
             DrawerFood= new List<Food>();
