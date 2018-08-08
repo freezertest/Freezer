@@ -17,8 +17,25 @@ body{
 }
 .fa-snowflake{
     margin-left: 5px;
+    padding-right: 5px;
 }
 
 .rbtn{
     visibility: hidden;
+}
+#pantry{
+    margin-left: 28px;
+    width: 110px;
+}
+span.fa-cookie-bite{
+    margin-right: 15px;
+    margin-left: -7px;
+}
+
+#indexpantry{
+    color: saddlebrown;
+}
+
+#indexpantry:hover{
+    color: saddlebrown !important;
 }

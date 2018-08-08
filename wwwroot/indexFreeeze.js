@@ -5,12 +5,16 @@ $(document).ready(function () {
     $("#successpace").hide();
     $('#invalid').css("display", "none");
     $('#foodfilteredlist').hide();
+    $('#pantry').hide();
 
 
     //change section
-    // $("#changesection").click(function{
-
-    // });
+    $("#changesection").click(function(){
+        if ($("#pantry").is(':hidden')==true)
+            $("#pantry").show();
+        else
+        $('#pantry').hide();
+    });
 
     //"Aggiungi" click
     $("#btnadd").click(function () {
@@ -22,6 +26,7 @@ $(document).ready(function () {
 
         LoadTypes();
         LoadPortions();
+        $('#pantry').hide();
         $("#foodlist").hide();
         $('#foodfilteredlist').hide();
         $("#successpace").hide();
@@ -64,6 +69,7 @@ $(document).ready(function () {
         //"LISTA" click
         $("#btnlist").click(function () {
             $("#addingform").hide();
+            $('#pantry').hide();
             $("#errorspace").hide();
             $('#invalid').css("display", "none");
             LoadList();
@@ -76,6 +82,7 @@ $(document).ready(function () {
     $("#btndelete").click(function () {
         $("#addingform").hide();
         $("#errorspace").hide();
+        $('#pantry').hide();
         $('#invalid').css("display", "none");
         $('#rbtn').css("visibility", "visible");
         if ($('#foodfilteredlist').is(":hidden") == true && $('#foodlist').is(":hidden") == true)
@@ -108,6 +115,7 @@ $(document).ready(function () {
     
     //"SEARCH" click
     $("#researchbtn").click(function () {
+        $('#pantry').hide();
         if ($("#research").css("visibility") == "visible")
             $("#research").css("visibility", "hidden");
         $("#research").css("visibility", "visible");
