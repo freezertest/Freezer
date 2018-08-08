@@ -89,7 +89,7 @@ $(document).ready(function () {
             LoadList();
     });
     //"ELIMINA(BIDONCINO)" click
-    $('rbtn').click(function () {
+    $('.rbtn').click(function () {
         chosen = $(this).attr('id');
         $.ajax({
             type: "DELETE",
