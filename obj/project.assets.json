@@ -11838,11 +11838,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\aalto.stage\\Desktop\\FreeezeDotNet\\FreeezeDotNet.csproj",
+      "projectUniqueName": "C:\\Users\\aalto.stage\\Desktop\\Freezer\\FreeezeDotNet.csproj",
       "projectName": "FreeezeDotNet",
-      "projectPath": "c:\\Users\\aalto.stage\\Desktop\\FreeezeDotNet\\FreeezeDotNet.csproj",
+      "projectPath": "C:\\Users\\aalto.stage\\Desktop\\Freezer\\FreeezeDotNet.csproj",
       "packagesPath": "C:\\Users\\aalto.stage\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\aalto.stage\\Desktop\\FreeezeDotNet\\obj\\",
+      "outputPath": "C:\\Users\\aalto.stage\\Desktop\\Freezer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

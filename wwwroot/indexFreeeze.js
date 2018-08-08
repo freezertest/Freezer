@@ -125,13 +125,13 @@ $(document).ready(function () {
         $('#foodfilteredlist').hide();
         var searchTerm = $("#researchtext").val();
         if (searchTerm.toUpperCase() == "PESCE" || searchTerm.toUpperCase() == "CARNE" || searchTerm.toUpperCase() == "LEGUMI" || searchTerm.toUpperCase() == "VERDURA" || searchTerm.toUpperCase().contains("ERBE" || "SPEZIE") == true || searchTerm.toUpperCase() == "ALTRO") {
-            $.get("https://localhost:5001/api/searchtype", function (data, getResult) {
-                if (getResult.toUpperCase().contains('INESISTENTE')) {
+            $.get("https://localhost:5001/api/searchtype"+searchTerm, function (data) {
+                if (data.toUpperCase().contains('INESISTENTE')) {
                     $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
                     $("#errorspace").show();
                 }
-                if (getResult.toUpperCase().contains('NON SONO PRESENTI ALIMENTI')) {
-                    $("#errormessage").html(getResult);
+                if (data.toUpperCase().contains('NON SONO PRESENTI ALIMENTI')) {
+                    $("#errormessage").html(data);
                     $("#errorspace").show();
                 }
                 LoadFrCotentByType(data, searchTerm);
@@ -139,7 +139,7 @@ $(document).ready(function () {
         }
         else {
             if (searchTerm.toUpperCase() == "X1" || searchTerm.toUpperCase() == "X2" || searchTerm.toUpperCase() == "X3") {
-                $.get("https://localhost:5001/api/searchportion", function (data) {
+                $.get("https://localhost:5001/api/searchportion/"+searchTerm, function (data) {
                     if (getResult.toUpperCase().contains('INESISTENTE')) {
                         $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
                         $("#errorspace").show();
