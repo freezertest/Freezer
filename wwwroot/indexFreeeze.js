@@ -24,6 +24,7 @@ $(document).ready(function () {
         LoadPortions();
         $("#foodlist").hide();
         $('#foodfilteredlist').hide();
+        $("#successpace").hide();
         $('#invalid').css("display", "none");
         $("#addingform").show();
     });
@@ -42,18 +43,20 @@ $(document).ready(function () {
             url: "https://localhost:5001/api/food",
             type: "post",
             data: row,
-            datatype: "json",
-            contenttype: "application/json",
+            dataType: "json",
+            contentType: "application/json",
             success: function (response) {
-                $("#successmessage").html(response);
-                $("#successpace").show();
-                $("#addingform").hide();
-            },
-            error: function (response) {
-                if(response.toUpperCase().contains("TIPO"))
-                $('#invalid').css("display","block");
-
                 $("#errormessage").html(response);
+                $("#errorspace").show();
+                $('#invalid').css("display","block");
+                if(response.toUpperCase().contains("SUCCESSO")==true){
+                    $("#successmessage").html(response);
+                    $("#successpace").show();
+                    $("#addingform").hide();
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#errormessage").html(errorThrown+"<br/>Non hai riempito qualche campo!");
                 $("#errorspace").show();
             }
         });
@@ -61,8 +64,8 @@ $(document).ready(function () {
         $("#btnlist").click(function () {
             $("#addingform").hide();
             $("#errorspace").hide();
-            $("#foodlist").show();
             $('#invalid').css("display", "none");
+            $("#foodlist").show();
             LoadList();
         });
 
@@ -141,6 +144,15 @@ $(document).ready(function () {
                 $("#errorspace").show();
             }
         }
+    });
+    //HOMEPAGE click
+    $('#homepage').click(function(){
+        window.location.href = "https://localhost:5001/indexFreeeze.html";
+    });
+    //CLOSE click
+    $('#close').click(function(){
+        $('#errorspace').hide();
+        $('#successpace').hide();
     });
 });
 //LOAD FILTERED LIST

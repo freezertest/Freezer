@@ -30,9 +30,9 @@ namespace FreeezeDotNet.Controllers
          }
 
         [HttpPost]
-        public string Post([FromBody] FormViewModel value)
+        public ActionResult<IEnumerable<string>> Post([FromBody] FormViewModel value)
         {
-            return _currentFood.VerifyFood(value);
+            return  new JsonResult(_currentFood.VerifyFood(value));
         }
 
         [HttpDelete("{id}")]

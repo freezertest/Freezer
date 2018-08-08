@@ -105,26 +105,49 @@
             </table>
     </div>
     <!--Error space-->
-    <div class="card" id="errorspace">
-        <h5 class="card-header">
-            <span class="fas fa-exclamation-triangle"></span> Attenzione!</h5>
-        <div class="card-body">
-            <h5 class="card-title">Errore!</h5>
-            <p class="card-text" id="errormessage"></p>
-            <a href="https://localhost:5001/index.html" class="btn btn-primary">Home page</a>
+    <div class="modal" tabindex="-1" role="dialog" id="errorspace">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><span class="fas fa-exclamation-triangle"></span> Attenzione!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h5>Errore!</h5>
+              <p id="errormessage"></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+              <button type="button" class="btn btn-primary" id="homepage">Home Page</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <!--Success space-->
-    <div class="card" id="successpace">
-        <h5 class="card-header">
-            <span class="fas fa-check"></span> Attenzione!</h5>
-        <div class="card-body">
-            <h5 class="card-title">Successo!</h5>
-            <p class="card-text" id="successmessage"></p>
-            <a href="https://localhost:5001/index.html" class="btn btn-primary">Home page</a>
+    <div class="modal" tabindex="-1" role="dialog" id="successpace">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><span class="fas fa-check"></span> Attenzione!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Successo!</h5>
+                  <p id="successmessage"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                  <button type="button" class="btn btn-primary" id="homepage">Home Page</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-
 </body>
 
 </html>
