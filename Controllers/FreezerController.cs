@@ -24,8 +24,7 @@ namespace Inventory.Controllers
         [HttpGet]
         public JsonResult GetFreezers()
         {
-            var test = new JsonResult(_freezerRepository.GetAllFreezers().ToList());
-            return test;
+            return new JsonResult(_freezerRepository.GetAllFreezers().ToList());
         }
 
         [Route("getsinglefreezer/{id}")]

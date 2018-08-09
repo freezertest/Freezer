@@ -16,7 +16,7 @@ namespace Inventory.Repository
         }
         public List<Freezer> GetAllFreezers()
         {
-            var test = _db.Freezers.Include(p => p.Drawers).ThenInclude(l => l.DrawerFood).ToList();
+            var test = _db.Freezers.Include(p => p.Drawers).ThenInclude(l => l.DrawerFood).ThenInclude(m=>m.Type).Include(p=>p.Drawers).ThenInclude(l => l.DrawerFood).ThenInclude(m=>m.Portion).ToList();
             return test;
         }
         public Freezer GetById(int id)

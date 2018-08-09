@@ -235,7 +235,7 @@ function LoadList() {
                     sHtml+='<tr><td colspan="4">Non ci sono alimenti in questo cassetto</tr></td></tbody>';
 
                 for (var m = 0; m < fr[i].Drawers[j].DrawerFood.length; m++)
-                    sHtml+='<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>';
+                    sHtml+='<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type.Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion.Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>';
                 $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</tbody>');
             }
             $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table').append(sHtml+'</table>');
