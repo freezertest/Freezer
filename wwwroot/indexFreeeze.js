@@ -77,7 +77,6 @@ $(document).ready(function () {
 
     });
 
-
     //"DELETE" click
     $("#btndelete").click(function () {
         $("#addingform").hide();
@@ -109,8 +108,6 @@ $(document).ready(function () {
                 $("#errorspace").show();
             }
         });
-
-
     });
 
     //"SEARCH" click
@@ -124,37 +121,68 @@ $(document).ready(function () {
     $("#researchimpbtn").click(function () {
         $('#foodfilteredlist').hide();
         var searchTerm = $("#researchtext").val();
-        if (searchTerm.toUpperCase() == "PESCE" || searchTerm.toUpperCase() == "CARNE" || searchTerm.toUpperCase() == "LEGUMI" || searchTerm.toUpperCase() == "VERDURA" || searchTerm.toUpperCase().contains("ERBE" || "SPEZIE") == true || searchTerm.toUpperCase() == "ALTRO") {
-            $.get("https://localhost:5001/api/searchtype" + searchTerm, function (data) {
-                if (data.toUpperCase().contains('INESISTENTE')) {
-                    $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
-                    $("#errorspace").show();
-                }
-                if (data.toUpperCase().contains('NON SONO PRESENTI ALIMENTI')) {
-                    $("#errormessage").html(data);
-                    $("#errorspace").show();
-                }
-                LoadFrCotentByType(data, searchTerm);
-            });
-        }
-        else {
-            if (searchTerm.toUpperCase() == "X1" || searchTerm.toUpperCase() == "X2" || searchTerm.toUpperCase() == "X3") {
-                $.get("https://localhost:5001/api/searchportion/" + searchTerm, function (data) {
-                    if (getResult.toUpperCase().contains('INESISTENTE')) {
+        var filteredList;
+        var portions;
+        var types;
+        $.when(
+            
+            $.get("https://localhost:5001/api/searchtype/" + searchTerm, function (data) {
+                filteredList = data;
+            }),
+            $.get("https://localhost:5001/api/portions", function (data) {
+                portions = data;
+            }),
+            $.get("https://localhost:5001/api/types", function (data) {
+                types = data;
+            })
+        ).then(function () {
+            $('#termsearched').append(searchTerm);
+            if (searchTerm.toUpperCase() == "PESCE" || searchTerm.toUpperCase() == "CARNE" || searchTerm.toUpperCase() == "LEGUMI" || searchTerm.toUpperCase() == "VERDURA" || searchTerm.toUpperCase().contains("ERBE" || "SPEZIE") == true || searchTerm.toUpperCase() == "ALTRO") {
+                if (Array.isArray(filteredList) == false) {
+                    if (filteredList.toUpperCase().contains('INESISTENTE')) {
                         $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
                         $("#errorspace").show();
                     }
-                    else {
-                        LoadFrCotentByPortion(data, searchTerm);
+                    if (filteredList.toUpperCase().contains('NON SONO PRESENTI ALIMENTI')) {
+                        $("#errormessage").html(data);
+                        $("#errorspace").show();
                     }
-                });
+                }
+
+                for (var i = 0; i < types.length; i++) {
+                    $('#foodfilteredtable').append('<thead><tr><td class="table-info" scope="col" id="' + types[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></tr></thead><tbody id="' + types[i].Name + 'body">');
+                    for (var j = 0; j < filteredList.length; j++) {
+                        if (filteredList[j].Type.toUpperCase() == data[i].Name.toUpperCase())
+                            $('#' + types[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="' + filteredList[j].Id + '"><span class="far fa-trash-alt "></span></button></td></tr>');
+                    }
+                }
+                $('#foodfilteredtable').append('</tbody>');
+                $('#foodfilteredlist').show();
             }
             else {
-                $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
-                $("#errorspace").show();
+                if (searchTerm.toUpperCase() == "X1" || searchTerm.toUpperCase() == "X2" || searchTerm.toUpperCase() == "X3") {
+                    if (filteredList.toUpperCase().contains('INESISTENTE')) {
+                        $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
+                        $("#errorspace").show();
+                    }
+                    for (var i = 0; i < portions.length; i++) {
+                        $('#foodfilteredtable').append('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '">' + portions[i].Name + '</td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></thead><tbody id="' + portions[i].Name + 'body">');
+                        for (var j = 0; j < filteredList.length; j++) {
+                            if (filteredList[j].Portion.toUpperCase() == portions[i].Name.toUpperCase())
+                                $('#' + portions[i].Name + 'body').append('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="' + filteredList[j].Id + '"><span class="far fa-trash-alt" ></span></button></td></tr>');
+                        }
+                    }
+                    $('#foodfilteredtable').append('</tbody>');
+                    $('#foodfilteredlist').show();
+                }
+                else {
+                    $("#errormessage").html("Puoi cercare per tipo o per porzioni. Sei sicuro di aver digitato correttamente?")
+                    $("#errorspace").show();
+                }
             }
-        }
+        });
     });
+
     //HOMEPAGE click
     $('#homepage').click(function () {
         window.location.href = "https://localhost:5001/indexFreeeze.html";
@@ -165,34 +193,8 @@ $(document).ready(function () {
         $('#successpace').hide();
     });
 });
-//LOAD FILTERED LIST
-function LoadFrCotentByType(filteredList, searchterm) {
-    $('#termsearched').append(searchterm);
-    $.get("https://localhost:5001/api/portions", function (data) {
-        for (i = 0; i < data.length; i++)
-            $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></thead><tbody id="' + data[i].Name + 'body">');
-        for (j = 0; j < filteredList.length; j++) {
-            if (filteredList[j].Portion.toUpperCase() == data[i].Name.toUpperCase())
-                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" id="' + filteredList[j].Id + '"><span class="far fa-trash-alt" ></span></button></td></tr>');
-        }
-        $('#foodfilteredtable').html('</tbody>');
-        $('#foodfilteredlist').show();
-    });
-}
 
-function LoadFrCotentByPortion(filteredList, searchterm) {
-    $('#termsearched').append(searchterm);
-    $.get("https://localhost:5001/api/types", function (data) {
-        for (i = 0; i < data.length; i++)
-            $('#foodfilteredtable').html('<thead><tr><td class="table-info" scope="col" id="' + data[i].Name + '"></td></tr><tr><td scope="col">Nome</td><td scope="col">Freezer</td><td scope="col">Cassetto</td><td scope="col">Note</td><td scope="col"> </td></tr></tr></thead><tbody id="' + data[i].Name + 'body">');
-        for (j = 0; j < filteredList.length; j++) {
-            if (filteredList[j].Type.toUpperCase() == data[i].Name.toUpperCase())
-                $('#' + data[i].Name + 'body').html('<tr><td>' + filteredList[j].Name + '</td><td>' + filteredList[j].FreezerName + '</td><td>' + filteredList[j].DrawerName + '</td><td>' + filteredList[j].Notes + '</td><td><button type="button" class="btn btn-danger rbtn" Id="' + filteredList[j].Id + '"><span class="far fa-trash-alt "></span></button></td></tr>');
-        }
-        $('#foodfilteredtable').html('</tbody>');
-        $('#foodfilteredlist').show();
-    });
-}
+//-----------OUT OF DOC.READY()----------------------------------------------------------------------------------------
 
 //FUNCTIONS LOAD FORM
 function LoadFreezers() {
@@ -230,16 +232,16 @@ function LoadList() {
             $("#foodlist").append('<div id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list"><h2 id="' + fr[i].Name.toLowerCase() + 'title">' + fr[i].Name + '</h2><table class="table table-striped" id="' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table"></table></div>');
             var sHtml;
             for (var j = 0; j < fr[i].Drawers.length; j++) {
-                sHtml+='<thead><tr><td class="table-info" scope="col">' + fr[i].Drawers[j].Name.toLowerCase() + '</td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>';
+                sHtml += '<thead><tr><td class="table-info" scope="col">' + fr[i].Drawers[j].Name.toLowerCase() + '</td></tr><tr><td scope="col">Nome</td><td scope="col">Tipo</td><td scope="col">Porzione</td><td scope="col">Note</td></tr></thead><tbody>';
                 if (fr[i].Drawers[j].DrawerFood.length <= 0)
-                    sHtml+='<tr><td colspan="4">Non ci sono alimenti in questo cassetto</tr></td></tbody>';
+                    sHtml += '<tr><td colspan="4">Non ci sono alimenti in questo cassetto</tr></td></tbody>';
 
                 for (var m = 0; m < fr[i].Drawers[j].DrawerFood.length; m++)
-                    sHtml+='<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type.Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion.Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>';
+                    sHtml += '<tr><td>' + fr[i].Drawers[j].DrawerFood[m].Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Type.Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Portion.Name + '</td><td>' + fr[i].Drawers[j].DrawerFood[m].Notes + '</td><button type="button" class="btn btn-danger rbtn" id="' + fr[i].Drawers[j].DrawerFood[m].Id + '"><span class="far fa-trash-alt "></span></button></tr>';
                 $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'list').append('</tbody>');
             }
-            $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table').append(sHtml+'</table>');
-            sHtml='';
+            $('#' + fr[i].Name.toLowerCase().replace(/\s+/, "") + 'table').append(sHtml + '</table>');
+            sHtml = '';
         }
 
     });

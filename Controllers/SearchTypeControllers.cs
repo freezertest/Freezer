@@ -65,7 +65,7 @@ namespace Inventory.Controllers
             //Crea lista filtrata
             string ris = string.Empty;
             typelistfiltered = _typesRepository.CreateListByType(searchType, out ris);
-            if (ris.ToUpper() != "SUCCESS")
+            if (ris.ToUpper() != "SUCCES")
                 return ris;
 
             return new JsonResult(typelistfiltered);
