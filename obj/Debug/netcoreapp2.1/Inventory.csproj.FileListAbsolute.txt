@@ -12,3 +12,17 @@ C:\Users\aalto.stage\Desktop\Freezer\obj\Debug\netcoreapp2.1\Inventory.AssemblyI
 C:\Users\aalto.stage\Desktop\Freezer\obj\Debug\netcoreapp2.1\Inventory.RazorTargetAssemblyInfo.cache
 C:\Users\aalto.stage\Desktop\Freezer\obj\Debug\netcoreapp2.1\Inventory.dll
 C:\Users\aalto.stage\Desktop\Freezer\obj\Debug\netcoreapp2.1\Inventory.pdb
+C:\Users\Greta\Desktop\Inventory\Freezer\bin\Debug\netcoreapp2.1\Inventory.deps.json
+C:\Users\Greta\Desktop\Inventory\Freezer\bin\Debug\netcoreapp2.1\Inventory.runtimeconfig.json
+C:\Users\Greta\Desktop\Inventory\Freezer\bin\Debug\netcoreapp2.1\Inventory.runtimeconfig.dev.json
+C:\Users\Greta\Desktop\Inventory\Freezer\bin\Debug\netcoreapp2.1\Inventory.dll
+C:\Users\Greta\Desktop\Inventory\Freezer\bin\Debug\netcoreapp2.1\Inventory.pdb
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.csprojAssemblyReference.cache
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.csproj.CoreCompileInputs.cache
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.RazorAssemblyInfo.cache
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.RazorAssemblyInfo.cs
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.AssemblyInfoInputs.cache
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.AssemblyInfo.cs
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.RazorTargetAssemblyInfo.cache
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.dll
+C:\Users\Greta\Desktop\Inventory\Freezer\obj\Debug\netcoreapp2.1\Inventory.pdb
