@@ -36,3 +36,7 @@ span.fa-cookie-bite{
 #indexpantry:hover{
     color: saddlebrown !important;
 }
+
+table{
+    background-color: whitesmoke;
+}
